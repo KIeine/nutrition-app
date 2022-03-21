@@ -1,10 +1,14 @@
 <script lang="ts" setup name="DefaultLayout">
-import Home from '@/pages/Home.vue';
+import Footer from '@/components/Footer.vue';
 </script>
 
 <template>
-  <div>
-    Default Layout
-    <Home />
+  <div class="flex flex-col w-full min-h-screen">
+    <main class="px-5 pt-24 mb-20 md:px-40">
+      <div class="max-w-4xl mx-auto desktop:max-w-7xl">
+        <slot />
+      </div>
+    </main>
+    <Footer />
   </div>
 </template>
