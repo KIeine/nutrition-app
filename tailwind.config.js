@@ -6,6 +6,15 @@ module.exports = {
     './src/features/**/*.ts',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        jet: {
+          500: '#363537',
+        },
+        honeydew: {
+          500: '#ECFFF8',
+        },
+      },
+    },
   },
 };
