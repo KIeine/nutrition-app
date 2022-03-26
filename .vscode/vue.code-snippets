@@ -19,6 +19,7 @@
     "body": [
       "<script setup lang=\"ts\" name=\"${1}\">",
       "</script>",
+      "",
       "<template>$0</template>"
     ],
     "description": "vue component template"
