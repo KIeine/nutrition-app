@@ -8,8 +8,12 @@ const links = [
     href: '/home',
   },
   {
-    name: 'Add Ingredients',
-    href: '/add-ingredients',
+    name: 'Ingredients',
+    href: '/ingredients',
+  },
+  {
+    name: 'Meals',
+    href: '/meals',
   },
 ];
 </script>
