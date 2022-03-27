@@ -28,6 +28,10 @@ const onClickOutside = (e: MouseEvent) => {
       >
         <h4 v-if="title" class="mb-10 text-xl text-bold">{{ title }}</h4>
         <slot />
+
+        <div v-if="$slots.footer" class="mt-10">
+          <slot name="footer" />
+        </div>
       </div>
     </div>
   </Teleport>
