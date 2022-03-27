@@ -3,6 +3,10 @@ const emit = defineEmits<{
   (e: 'close'): void;
 }>();
 
+const { title } = defineProps<{
+  title?: string;
+}>();
+
 const contentRef = ref<HTMLInputElement | null>(null);
 
 const onClickOutside = (e: MouseEvent) => {
@@ -20,8 +24,9 @@ const onClickOutside = (e: MouseEvent) => {
     >
       <div
         ref="contentRef"
-        class="max-w-lg p-10 bg-white border rounded-lg min-w-[300px]"
+        class="max-w-5xl p-5 bg-white border rounded-lg min-w-[300px]"
       >
+        <h4 v-if="title" class="mb-10 text-xl text-bold">{{ title }}</h4>
         <slot />
       </div>
     </div>
