@@ -18,9 +18,12 @@
     "prefix": "vbasens",
     "body": [
       "<script setup lang=\"ts\" name=\"${1}\">",
+      "$2",
       "</script>",
       "",
-      "<template>$0</template>"
+      "<template>",
+      "$0",
+      "</template>"
     ],
     "description": "vue component template"
   },
