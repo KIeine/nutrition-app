@@ -14,6 +14,9 @@ module.exports = {
         honeydew: {
           500: '#ECFFF8',
         },
+        pink: {
+          500: '#ea4c89',
+        },
       },
     },
   },
