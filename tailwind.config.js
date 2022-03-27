@@ -18,6 +18,10 @@ module.exports = {
           500: '#ea4c89',
         },
       },
+      boxShadow: {
+        'input-hover': '0px 0px 4px #ea4c89',
+        'input-focus': '0px 0px 4px rgba(234, 76, 137, 0.4)',
+      },
     },
   },
 };
