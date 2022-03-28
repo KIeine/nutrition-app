@@ -18,28 +18,33 @@ export const useIngredientForm = () => {
       name: 'name',
       title: 'Food name',
       type: 'text',
+      required: true,
     },
     description: {
       name: 'description',
       title: 'Description',
       type: 'text',
+      required: true,
     },
     carbohydrates: {
       name: 'carbohydrates',
       title: 'Carbohydrates',
       type: 'number',
+      required: true,
       min: 0,
     },
     protein: {
       name: 'protein',
       title: 'Protein',
       type: 'number',
+      required: true,
       min: 0,
     },
     fat: {
       name: 'fat',
       title: 'Fat',
       type: 'number',
+      required: true,
       min: 0,
     },
     sugar: {
@@ -58,12 +63,13 @@ export const useIngredientForm = () => {
       name: 'calories',
       title: 'Calories',
       type: 'number',
+      required: true,
       min: 0,
     },
     image: {
       name: 'image',
       title: 'Image',
-      type: 'file',
+      accept: 'image/*',
     },
   }));
 
