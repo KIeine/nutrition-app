@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredient;
 use Illuminate\Http\Request;
 
 class IngredientController extends Controller
@@ -34,7 +35,19 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        ddd($request->all());
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'calories' => 'required|numeric',
+            'carbohydrates' => 'required|numeric',
+            'fat' => 'required|numeric',
+            'protein' => 'required|numeric',
+            'fiber' => 'nullable|numeric',
+            'sugar' => 'nullable|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
+        ]);
+
+        Ingredient::create($validated);
     }
 
     /**
