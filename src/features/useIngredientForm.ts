@@ -24,7 +24,6 @@ export const useIngredientForm = () => {
       name: 'description',
       title: 'Description',
       type: 'text',
-      required: true,
     },
     carbohydrates: {
       name: 'carbohydrates',
