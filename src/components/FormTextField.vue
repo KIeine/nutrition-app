@@ -1,4 +1,6 @@
 <script setup lang="ts" name="FormTextField">
+import { PROVIDE_ID_TO_KEY } from '@/features/useProvideInjectKeys';
+
 interface Props {
   name: string;
   type: string;
@@ -12,6 +14,11 @@ interface Props {
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string | number | null): void;
 }>();
+
+const injectKey = PROVIDE_ID_TO_KEY.ingredientsCreate;
+const formErrors = inject<{
+  [key: string]: string;
+}>(injectKey);
 
 const {
   name,
@@ -35,15 +42,20 @@ const onInput = (e: Event) => {
       <span v-if="required" class="text-red-500">*</span>
     </span>
 
-    <input
-      :id="name"
-      :min="min"
-      :type="type"
-      :required="required"
-      :value="modelValue"
-      @input="onInput"
-      :class="{ 'w-32': small, 'w-full md:w-96': !small }"
-      class="p-1 border rounded-md outline-none hover:shadow-input-hover focus:shadow-input-focus"
-    />
+    <div>
+      <input
+        :id="name"
+        :min="min"
+        :type="type"
+        :required="required"
+        :value="modelValue"
+        @input="onInput"
+        :class="{ 'w-32': small, 'w-full md:w-96': !small }"
+        class="p-1 border rounded-md outline-none hover:shadow-input-hover focus:shadow-input-focus"
+      />
+      <p v-if="formErrors?.[name]" class="mt-1 text-xs text-red-500">
+        {{ formErrors[name] }}
+      </p>
+    </div>
   </label>
 </template>
