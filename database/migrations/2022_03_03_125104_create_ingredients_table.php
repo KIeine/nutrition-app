@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('name');
             $table->float('carbohydrates');
             $table->float('protein');
             $table->float('fat');
