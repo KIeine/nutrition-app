@@ -14,17 +14,19 @@ const {
   loading?: boolean;
 }>();
 
-const THEME_TO_CLASS = $computed(() => ({
-  primary:
-    disabled || loading
-      ? 'bg-gray-200 text-white'
-      : 'text-white bg-pink-500 hover:bg-pink-500/70 focus:bg-pink-500',
+const THEME_TO_CLASS = $computed(
+  (): theme => ({
+    primary:
+      disabled || loading
+        ? 'bg-gray-200 text-white'
+        : 'text-white bg-pink-500 hover:bg-pink-500/70 focus:bg-pink-500',
 
-  'primary-inverse':
-    disabled || loading
-      ? 'border border-gray-200 text-gray-200'
-      : 'text-pink-500 bg-white border border-pink-500 hover:bg-pink-500/20 focus:bg-pink-500/10',
-}));
+    'primary-inverse':
+      disabled || loading
+        ? 'border border-gray-200 text-gray-200'
+        : 'text-pink-500 bg-white border border-pink-500 hover:bg-pink-500/20 focus:bg-pink-500/10',
+  }),
+);
 
 const classesByTheme = computed(() => THEME_TO_CLASS[theme]);
 </script>
