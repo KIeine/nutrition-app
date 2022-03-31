@@ -4,9 +4,25 @@ import { PROVIDE_ID_TO_KEY } from '@/features/useProvideInjectKeys';
 import BaseButton from '@/components/BaseButton.vue';
 import IngredientsAddModal from '@/components/IngredientsAddModal.vue';
 
-const { errors } = defineProps<{
+type Ingredient = {
+  id: string;
+  name: string;
+  description: string;
+  calories: number;
+  carbohydrates: number;
+  protein: number;
+  fat: number;
+  sugar: number;
+  fiber: number;
+  image: string;
+};
+
+interface Props {
   errors?: object;
-}>();
+  ingredients: Ingredient[];
+}
+
+const { errors, ingredients = [] } = defineProps<Props>();
 
 const provideKey = PROVIDE_ID_TO_KEY.ingredientsCreate;
 provide(
@@ -14,7 +30,7 @@ provide(
   computed(() => errors),
 );
 
-let showModal = $ref(true);
+let showModal = $ref(false);
 
 const onAddIngredient = () => {
   showModal = true;
@@ -34,5 +50,9 @@ const onCloseModal = () => {
     <BaseButton @click="onAddIngredient">Add an ingredient</BaseButton>
 
     <IngredientsAddModal v-if="showModal" @close="onCloseModal" />
+
+    <div v-for="ingredient in ingredients">
+      {{ ingredient.name }}
+    </div>
   </div>
 </template>
