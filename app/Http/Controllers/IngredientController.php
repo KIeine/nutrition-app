@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class IngredientController extends Controller
 {
@@ -14,7 +15,8 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        return inertia('IngredientsIndex');
+        $ingredients = Ingredient::all();
+        return inertia('IngredientsIndex', ['ingredients' => $ingredients]);
     }
 
     /**
@@ -47,7 +49,16 @@ class IngredientController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
         ]);
 
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = Storage::disk('public')->putFileAs('ingredients', $image, $name);
+            $validated['image'] = $path;
+        }
+
         Ingredient::create($validated);
+        return redirect()->back();
     }
 
     /**
