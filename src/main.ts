@@ -3,6 +3,7 @@ import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 
 import './assets/main.css';
+import '../auto-imports.d';
 
 import DefaultLayout from './layouts/DefaultLayout.vue';
 import BaseIcon from './components/BaseIcon.vue';
