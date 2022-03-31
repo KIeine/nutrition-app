@@ -4,7 +4,7 @@ import { PROVIDE_ID_TO_KEY } from '@/features/useProvideInjectKeys';
 import BaseButton from '@/components/BaseButton.vue';
 import IngredientsAddModal from '@/components/IngredientsAddModal.vue';
 
-type Ingredient = {
+interface Ingredient {
   id: string;
   name: string;
   description: string;
@@ -15,14 +15,12 @@ type Ingredient = {
   sugar: number;
   fiber: number;
   image: string;
-};
-
-interface Props {
-  errors?: object;
-  ingredients: Ingredient[];
 }
 
-const { errors, ingredients = [] } = defineProps<Props>();
+const { errors, ingredients = [] } = defineProps<{
+  errors?: object;
+  ingredients: Ingredient[];
+}>();
 
 const provideKey = PROVIDE_ID_TO_KEY.ingredientsCreate;
 provide(
