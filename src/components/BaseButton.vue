@@ -1,5 +1,5 @@
 <script setup lang="ts" name="BaseButton">
-interface theme {
+interface Theme {
   primary: string;
   'primary-inverse': string;
 }
@@ -9,13 +9,13 @@ const {
   disabled = false,
   loading = false,
 } = defineProps<{
-  theme?: keyof theme;
+  theme?: keyof Theme;
   disabled?: boolean;
   loading?: boolean;
 }>();
 
 const THEME_TO_CLASS = $computed(
-  (): theme => ({
+  (): Theme => ({
     primary:
       disabled || loading
         ? 'bg-gray-200 text-white'
