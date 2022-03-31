@@ -52,7 +52,7 @@ const onSubmit = () => {
         <BaseButton
           :disabled="form.processing"
           @click="onClose"
-          theme="primary-inverse"
+          theme="secondary"
         >
           Cancel
         </BaseButton>
