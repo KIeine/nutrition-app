@@ -1,5 +1,4 @@
 <script setup lang="ts" name="Navbar">
-import BaseIcon from './BaseIcon.vue';
 import NavbarLink from './NavbarLink.vue';
 
 const links = [

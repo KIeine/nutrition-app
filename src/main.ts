@@ -3,10 +3,11 @@ import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 
 import './assets/main.css';
-import '../auto-imports.d';
 
 import DefaultLayout from './layouts/DefaultLayout.vue';
+import BaseIcon from './components/BaseIcon.vue';
 
+// TODO fix ziggy's route() not working in template
 declare global {
   interface Window {
     route?: any;
@@ -27,6 +28,8 @@ createInertiaApp({
       // inertia
       .component('InertiaLink', Link)
       .component('InertiaHead', Head)
+      // components
+      .component('BaseIcon', BaseIcon)
       .mount(el);
   },
 });
