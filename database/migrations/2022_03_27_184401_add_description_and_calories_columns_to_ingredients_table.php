@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('ingredients', function (Blueprint $table) {
             $table->string('description')->nullable()->after('name');
-            $table->float('calories')->nullable()->after('description');
+            $table->float('calories')->after('description');
         });
     }
 

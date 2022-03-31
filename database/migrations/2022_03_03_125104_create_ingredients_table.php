@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('carbohydrates');
             $table->float('protein');
             $table->float('fat');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
