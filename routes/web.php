@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\MealController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,9 @@ Route::get('/home', HomeController::class)->name('home');
 Route::controller(IngredientController::class)->group(function () {
     Route::get('/ingredients', 'index')->name('ingredients.index');
     Route::post('/ingredients', 'store')->name('ingredients.store');
+});
+
+Route::controller(MealController::class)->group(function () {
+    Route::get('/meals', 'index')->name('meals.index');
+    Route::post('/meals', 'store')->name('meals.store');
 });
