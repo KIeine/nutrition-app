@@ -1,4 +1,6 @@
 <script setup lang="ts" name="FormModal">
+import Modal from './Modal.vue';
+
 const emit = defineEmits<{
   (e: 'submit'): void;
   (e: 'close'): void;
@@ -21,11 +23,12 @@ const onClose = () => {
 const onSubmit = () => {
   emit('submit');
 };
+// TODO submit with key combination
 </script>
 
 <template>
   <Modal :title="title" @close="onClose">
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit" @keydown.enter.prevent>
       <div class="space-y-4 sm:px-10">
         <slot />
       </div>
