@@ -1,8 +1,6 @@
 <script setup lang="ts" name="MealsIndex">
 import { PROVIDE_ID_TO_KEY } from '@/features/useProvideInjectKeys';
 
-import BaseButton from '@/components/BaseButton.vue';
-
 interface Meal {}
 
 const { errors, meals = [] } = defineProps<{
@@ -18,7 +16,7 @@ provide(
 
 let showModal = $ref(false);
 
-const onAddIngredient = () => {
+const onCreateMeal = () => {
   showModal = true;
 };
 
@@ -31,5 +29,9 @@ const onCloseModal = () => {
   <div>
     <InertiaHead title="Meals" />
     <h1 class="text-2xl font-medium tracking-wide">Meals</h1>
+
+    <div class="mt-10">
+      <BaseButton @click="onCreateMeal">Create a meal</BaseButton>
+    </div>
   </div>
 </template>

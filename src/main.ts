@@ -7,6 +7,7 @@ import '../auto-imports.d';
 
 import DefaultLayout from './layouts/DefaultLayout.vue';
 import BaseIcon from './components/BaseIcon.vue';
+import BaseButton from './components/BaseButton.vue';
 
 // TODO fix ziggy's route() not working in template
 declare global {
@@ -31,6 +32,7 @@ createInertiaApp({
       .component('InertiaHead', Head)
       // components
       .component('BaseIcon', BaseIcon)
+      .component('BaseButton', BaseButton)
       .mount(el);
   },
 });

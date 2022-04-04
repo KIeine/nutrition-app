@@ -1,7 +1,6 @@
 <script setup lang="ts" name="IngredientsIndex">
 import { PROVIDE_ID_TO_KEY } from '@/features/useProvideInjectKeys';
 
-import BaseButton from '@/components/BaseButton.vue';
 import IngredientsAddModal from '@/components/IngredientsAddModal.vue';
 
 interface Ingredient {
