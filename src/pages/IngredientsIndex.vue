@@ -1,21 +1,8 @@
 <script setup lang="ts" name="IngredientsIndex">
 import IngredientsAddModal from '@/components/IngredientsAddModal.vue';
+import { Ingredient } from '@/features/useTypes';
 
-interface Ingredient {
-  id: string;
-  name: string;
-  description: string;
-  calories: number;
-  carbohydrates: number;
-  protein: number;
-  fat: number;
-  sugar: number;
-  fiber: number;
-  image: string;
-}
-
-const { errors, ingredients = [] } = defineProps<{
-  errors?: object;
+const { ingredients = [] } = defineProps<{
   ingredients: Ingredient[];
 }>();
 
