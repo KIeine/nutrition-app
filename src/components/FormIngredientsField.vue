@@ -1,0 +1,79 @@
+<script setup lang="ts" name="FormIngredientsField">
+import { Ingredient } from '@/features/useTypes';
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: Ingredient[]): void;
+}>();
+
+const { modelValue = [], error = '' } = defineProps<{
+  modelValue?: Ingredient[];
+  error?: string;
+}>();
+
+let ingredientSearch = $ref<string>('');
+let selectedIngredients = $ref<Ingredient[]>(modelValue);
+
+const ingredients = inject<Ingredient[]>('ingredients');
+
+const filteredIngredients = computed(() => {
+  const search = ingredientSearch.toLowerCase();
+  if (!search) {
+    return [];
+  }
+
+  return ingredients?.filter((x) => x.name.includes(search));
+});
+
+const onSelectIngredient = (ingredient: Ingredient) => {
+  if (selectedIngredients.includes(ingredient)) {
+    return;
+  }
+
+  selectedIngredients.push(ingredient);
+  ingredientSearch = '';
+
+  emit('update:modelValue', selectedIngredients);
+};
+
+watch(
+  () => modelValue,
+  () => {
+    selectedIngredients = modelValue;
+  },
+  { deep: true },
+);
+</script>
+
+<template>
+  <label for="ingredients" class="flex flex-col items-center sm:flex-row">
+    <span class="min-w-[120px] md:mr-20">
+      Ingredients
+      <span class="text-red-500">*</span>
+    </span>
+
+    <div class="relative">
+      <input
+        id="ingredients"
+        v-model="ingredientSearch"
+        class="w-full p-1 border rounded-md outline-none md:w-96 hover:shadow-input-hover focus:shadow-input-focus"
+      />
+
+      <div
+        v-if="filteredIngredients?.length"
+        class="absolute w-full max-h-[10rem] mt-2 overflow-y-auto bg-white rounded-md shadow"
+      >
+        <div
+          v-for="ingredient in filteredIngredients"
+          :key="ingredient.id"
+          class="p-2 rounded-md hover:bg-gray-100 hover:cursor-pointer"
+          @click.stop="onSelectIngredient(ingredient)"
+        >
+          {{ ingredient.name }}
+        </div>
+      </div>
+      <p v-if="error" class="mt-1 text-xs text-red-500">
+        {{ error }}
+      </p>
+    </div>
+  </label>
+</template>
