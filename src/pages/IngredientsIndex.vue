@@ -21,7 +21,7 @@ const { errors, ingredients = [] } = defineProps<{
   ingredients: Ingredient[];
 }>();
 
-const provideKey = PROVIDE_ID_TO_KEY.ingredientsCreate;
+const provideKey = PROVIDE_ID_TO_KEY.formErrors;
 provide(
   provideKey,
   computed(() => errors),

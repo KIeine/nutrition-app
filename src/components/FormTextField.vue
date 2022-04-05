@@ -15,9 +15,9 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: string | number | null): void;
 }>();
 
-const injectKey = PROVIDE_ID_TO_KEY.ingredientsCreate;
+const injectKey = PROVIDE_ID_TO_KEY.formErrors;
 const formErrors = inject<{
-  [key: string]: string;
+  [key: string]: object;
 }>(injectKey);
 
 const {

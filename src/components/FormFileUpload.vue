@@ -1,11 +1,6 @@
 <script setup lang="ts" name="FormFileUpload">
 import { PROVIDE_ID_TO_KEY } from '@/features/useProvideInjectKeys';
 
-const injectKey = PROVIDE_ID_TO_KEY.ingredientsCreate;
-const formErrors = inject<{
-  [key: string]: string;
-}>(injectKey);
-
 interface Props {
   name: string;
   title: string;
@@ -13,11 +8,16 @@ interface Props {
   required?: boolean;
 }
 
-const { name, title, accept, required = false } = defineProps<Props>();
-
 const emit = defineEmits<{
   (e: 'update:modelValue', value: File): void;
 }>();
+
+const { name, title, accept, required = false } = defineProps<Props>();
+
+const injectKey = PROVIDE_ID_TO_KEY.formErrors;
+const formErrors = inject<{
+  [key: string]: object;
+}>(injectKey);
 
 const onInput = (e: Event) => {
   emit(
