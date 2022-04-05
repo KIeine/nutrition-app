@@ -1,18 +1,14 @@
 <script setup lang="ts" name="MealsIndex">
-import { PROVIDE_ID_TO_KEY } from '@/features/useProvideInjectKeys';
+import { Ingredient, Meal } from '@/features/useTypes';
 
-interface Meal {}
+import MealsAddModal from '@/components/MealsAddModal.vue';
 
-const { errors, meals = [] } = defineProps<{
-  errors?: object;
+const { meals = [], ingredients = [] } = defineProps<{
   meals: Meal[];
+  ingredients: Ingredient[];
 }>();
 
-const provideKey = PROVIDE_ID_TO_KEY.mealsCreate;
-provide(
-  provideKey,
-  computed(() => errors),
-);
+provide('ingredients', ingredients);
 
 let showModal = $ref(false);
 
@@ -32,6 +28,12 @@ const onCloseModal = () => {
 
     <div class="mt-10">
       <BaseButton @click="onCreateMeal">Create a meal</BaseButton>
+    </div>
+
+    <MealsAddModal v-if="showModal" @close="onCloseModal" />
+
+    <div v-for="meal in meals" :key="meal.id">
+      {{ meal.title }}
     </div>
   </div>
 </template>
