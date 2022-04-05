@@ -1,6 +1,4 @@
 <script setup lang="ts" name="FormTextareaField">
-import { PROVIDE_ID_TO_KEY } from '@/features/useProvideInjectKeys';
-
 interface Props {
   name: string;
   title: string;
@@ -9,16 +7,12 @@ interface Props {
   maxlength?: number;
   required?: boolean;
   modelValue?: string;
+  error?: string;
 }
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string | number | null): void;
 }>();
-
-const injectKey = PROVIDE_ID_TO_KEY.formErrors;
-const formErrors = inject<{
-  [key: string]: object;
-}>(injectKey);
 
 const {
   name,
@@ -28,6 +22,7 @@ const {
   maxlength,
   required = false,
   modelValue = '',
+  error = '',
 } = defineProps<Props>();
 
 const onInput = (e: Event) => {
@@ -53,8 +48,8 @@ const onInput = (e: Event) => {
         :class="{ 'w-32': small, 'w-full md:w-96': !small }"
         class="p-1 border rounded-md outline-none hover:shadow-input-hover focus:shadow-input-focus"
       />
-      <p v-if="formErrors?.[name]" class="mt-1 text-xs text-red-500">
-        {{ formErrors[name] }}
+      <p v-if="error" class="mt-1 text-xs text-red-500">
+        {{ error }}
       </p>
     </div>
   </label>

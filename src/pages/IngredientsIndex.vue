@@ -1,6 +1,4 @@
 <script setup lang="ts" name="IngredientsIndex">
-import { PROVIDE_ID_TO_KEY } from '@/features/useProvideInjectKeys';
-
 import IngredientsAddModal from '@/components/IngredientsAddModal.vue';
 
 interface Ingredient {
@@ -20,12 +18,6 @@ const { errors, ingredients = [] } = defineProps<{
   errors?: object;
   ingredients: Ingredient[];
 }>();
-
-const provideKey = PROVIDE_ID_TO_KEY.formErrors;
-provide(
-  provideKey,
-  computed(() => errors),
-);
 
 let showModal = $ref(false);
 

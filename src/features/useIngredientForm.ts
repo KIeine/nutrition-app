@@ -19,11 +19,13 @@ export const useIngredientForm = () => {
       title: 'Food name',
       type: 'text',
       required: true,
+      error: form.errors.name,
     },
     description: {
       name: 'description',
       title: 'Description',
       type: 'text',
+      error: form.errors.description,
     },
     carbohydrates: {
       name: 'carbohydrates',
@@ -31,6 +33,7 @@ export const useIngredientForm = () => {
       type: 'number',
       required: true,
       min: 0,
+      error: form.errors.carbohydrates,
     },
     protein: {
       name: 'protein',
@@ -38,6 +41,7 @@ export const useIngredientForm = () => {
       type: 'number',
       required: true,
       min: 0,
+      error: form.errors.protein,
     },
     fat: {
       name: 'fat',
@@ -45,18 +49,21 @@ export const useIngredientForm = () => {
       type: 'number',
       required: true,
       min: 0,
+      error: form.errors.fat,
     },
     sugar: {
       name: 'sugar',
       title: 'Sugar',
       type: 'number',
       min: 0,
+      error: form.errors.sugar,
     },
     fiber: {
       name: 'fiber',
       title: 'Fiber',
       type: 'number',
       min: 0,
+      error: form.errors.fiber,
     },
     calories: {
       name: 'calories',
@@ -64,11 +71,13 @@ export const useIngredientForm = () => {
       type: 'number',
       required: true,
       min: 0,
+      error: form.errors.calories,
     },
     image: {
       name: 'image',
       title: 'Image',
       accept: 'image/*',
+      error: form.errors.image,
     },
   }));
 
