@@ -9,6 +9,13 @@ class Meal extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'type',
+        'image',
+    ];
+
     public function ingredients()
     {
         return $this->belongsToMany(Ingredient::class);
