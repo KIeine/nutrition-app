@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('serving_description')->default('serving');
+            $table->string('serving_grams')->nullable();
             $table->float('carbohydrates');
             $table->float('protein');
             $table->float('fat');
