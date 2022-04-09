@@ -32,7 +32,7 @@ const onInput = (e: Event) => {
 
 <template>
   <label :for="name" class="flex flex-col items-center sm:flex-row">
-    <span class="min-w-[120px] md:mr-20">
+    <span class="min-w-[200px]">
       {{ title }}
       <span v-if="required" class="text-red-500">*</span>
     </span>

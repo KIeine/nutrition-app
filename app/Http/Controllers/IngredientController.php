@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IngredientPostRequest;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -35,19 +36,9 @@ class IngredientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IngredientPostRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
-            'calories' => 'required|numeric',
-            'carbohydrates' => 'required|numeric',
-            'fat' => 'required|numeric',
-            'protein' => 'required|numeric',
-            'fiber' => 'nullable|numeric',
-            'sugar' => 'nullable|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
-        ]);
+        $validated = $request->validated();
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

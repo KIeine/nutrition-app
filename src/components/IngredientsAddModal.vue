@@ -4,6 +4,7 @@ import { useIngredientForm } from '@/features/useIngredientForm';
 import FormModal from './FormModal.vue';
 import FormTextField from './FormTextField.vue';
 import FormFileUpload from './FormFileUpload.vue';
+import FormTextareaField from './FormTextareaField.vue';
 
 const emit = defineEmits<{
   (e: 'close'): void;
@@ -27,7 +28,13 @@ const onSubmit = () => {
 <template>
   <FormModal title="Add an ingredient" @close="onClose" @submit="onSubmit">
     <FormTextField v-bind="schema.name" v-model="form.name" />
-    <FormTextField v-bind="schema.description" v-model="form.description" />
+    <FormTextareaField v-bind="schema.description" v-model="form.description" />
+    <FormTextField v-bind="schema.serving_name" v-model="form.serving_name" />
+    <FormTextField
+      small
+      v-bind="schema.serving_grams"
+      v-model="form.serving_grams"
+    />
     <FormTextField small v-bind="schema.calories" v-model="form.calories" />
     <FormTextField
       small

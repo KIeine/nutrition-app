@@ -12,6 +12,8 @@ class Ingredient extends Model
     protected $fillable = [
         'name',
         'description',
+        'serving_name',
+        'serving_grams',
         'calories',
         'carbohydrates',
         'fat',

@@ -3,7 +3,9 @@ import { useForm } from '@inertiajs/inertia-vue3';
 export const useIngredientForm = () => {
   const form = useForm({
     name: null,
-    description: null,
+    description: '',
+    serving_name: 'serving',
+    serving_grams: null,
     carbohydrates: null,
     protein: null,
     fat: null,
@@ -25,7 +27,21 @@ export const useIngredientForm = () => {
       name: 'description',
       title: 'Description',
       type: 'text',
+      rows: 2,
       error: form.errors.description,
+    },
+    serving_name: {
+      name: 'serving_name',
+      title: 'Serving name',
+      type: 'text',
+      error: form.errors.serving_name,
+    },
+    serving_grams: {
+      name: 'serving_grams',
+      title: 'Serving size (in grams)',
+      type: 'number',
+      min: 0,
+      error: form.errors.serving_grams,
     },
     carbohydrates: {
       name: 'carbohydrates',
