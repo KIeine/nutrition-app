@@ -1,6 +1,10 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import { Ingredient } from './useTypes';
 
+type mealIngredientType = {
+  [key: string]: string;
+};
+
 export const useMealsForm = () => {
   const mealTypeOptions = [
     { label: 'Select a type', value: '' },
@@ -16,6 +20,8 @@ export const useMealsForm = () => {
     type: mealTypeOptions[0].value,
     ingredients: <Ingredient[]>[],
     image: null,
+    notes: <mealIngredientType>{},
+    quantities: <mealIngredientType>{},
   });
 
   const schema = computed(() => ({

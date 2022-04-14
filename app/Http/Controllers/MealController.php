@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MealPostRequest;
 use App\Models\Ingredient;
 use App\Models\Meal;
-use Illuminate\Http\Request;
 use Storage;
 
 class MealController extends Controller
@@ -20,16 +20,9 @@ class MealController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(MealPostRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|min:3|max:255',
-            'description' => 'required|string|max:2000',
-            'type' => 'required|string|max:255',
-            'ingredients' => 'required|array',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        // dd($request->all());
+        $validated = $request->validated();
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -46,7 +39,12 @@ class MealController extends Controller
             'image' => $validated['image'],
         ]);
 
-        $meal->ingredients()->attach($validated['ingredients']);
+        foreach ($validated['ingredients'] as $ingredient) {
+            $meal->ingredients()->attach($ingredient, [
+                'notes' => $validated['notes'][$ingredient] ?? null,
+                'serving_quantity' => $validated['quantities'][$ingredient] ?? 1,
+            ]);
+        }
 
         return redirect()->back();
     }

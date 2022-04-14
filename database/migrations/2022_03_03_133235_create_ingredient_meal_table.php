@@ -26,6 +26,7 @@ return new class extends Migration
                 ->on('meals')
                 ->onDelete('cascade');
 
+            $table->float('serving_quantity');
             $table->string('notes')->nullable();
             $table->timestamps();
         });
