@@ -1,12 +1,17 @@
 <script setup lang="ts" name="MealsIndex">
-import { Ingredient, Meal } from '@/features/useTypes';
+import { Ingredient, laravelPagination, Meal } from '@/features/useTypes';
 
 import MealsAddModal from '@/components/MealsAddModal.vue';
+import MealsTable from '@/components/MealsTable.vue';
 
-const { meals = [], ingredients = [] } = defineProps<{
-  meals: Meal[];
+type Props = {
+  meals: laravelPagination & {
+    data: Meal[];
+  };
   ingredients: Ingredient[];
-}>();
+};
+
+const { meals = [], ingredients = [] } = defineProps<Props>();
 
 provide('ingredients', ingredients);
 
@@ -32,8 +37,6 @@ const onCloseModal = () => {
 
     <MealsAddModal v-if="showModal" @close="onCloseModal" />
 
-    <div v-for="meal in meals" :key="meal.id">
-      {{ meal.title }}
-    </div>
+    <MealsTable class="mt-20" :meals="meals" />
   </div>
 </template>

@@ -11,7 +11,7 @@ class MealController extends Controller
 {
     public function index()
     {
-        $meals = Meal::all();
+        $meals = Meal::paginate(10);
         $ingredients = Ingredient::all();
 
         return inertia('MealsIndex', [
