@@ -1,12 +1,17 @@
 <script setup lang="ts" name="MealsIndex">
-import { Ingredient, laravelPagination, Meal } from '@/features/useTypes';
+import {
+  Ingredient,
+  laravelPagination,
+  Meal,
+  Calories,
+} from '@/features/useTypes';
 
 import MealsAddModal from '@/components/MealsAddModal.vue';
 import MealsTable from '@/components/MealsTable.vue';
 
 type Props = {
   meals: laravelPagination & {
-    data: Meal[];
+    data: Meal & Calories[];
   };
   ingredients: Ingredient[];
 };

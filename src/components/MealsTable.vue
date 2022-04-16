@@ -1,11 +1,11 @@
 <script setup lang="ts" name="IngredientsTable">
-import { laravelPagination, Meal } from '@/features/useTypes';
+import { Calories, laravelPagination, Meal } from '@/features/useTypes';
 
 import BaseTable from './BaseTable.vue';
 
 type Props = {
   meals: laravelPagination & {
-    data: Meal[];
+    data: Meal & Calories[];
   };
 };
 

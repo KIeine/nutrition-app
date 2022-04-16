@@ -11,7 +11,19 @@ class MealController extends Controller
 {
     public function index()
     {
-        $meals = Meal::paginate(10);
+        $meals = Meal::paginate(10)->through(fn ($meal) => [
+            'id' => $meal->id,
+            'title' => $meal->title,
+            'description' => $meal->description,
+            'image' => $meal->image,
+            'calories' => $meal->ingredients->sum('calories'),
+            'carbohydrates' => $meal->ingredients->sum('carbohydrates'),
+            'protein' => $meal->ingredients->sum('protein'),
+            'fat' => $meal->ingredients->sum('fat'),
+            'sugar' => $meal->ingredients->sum('sugar'),
+            'fiber' => $meal->ingredients->sum('fiber'),
+        ]);
+
         $ingredients = Ingredient::all();
 
         return inertia('MealsIndex', [

@@ -1,23 +1,26 @@
-export interface Ingredient {
-  id: number;
-  name: string;
-  description: string;
+export type Calories = {
   calories: number;
   carbohydrates: number;
   protein: number;
   fat: number;
   sugar: number;
   fiber: number;
-  image: string;
-}
+};
 
-export interface Meal {
+export type Ingredient = {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+} & Calories;
+
+export type Meal = {
   id: number;
   title: string;
   description: string;
   type: string;
   image: string;
-}
+};
 
 export type paginationLink = {
   active: boolean;

@@ -44,6 +44,7 @@ const onInput = (e: Event) => {
         :type="type"
         :required="required"
         :value="modelValue"
+        step="0.1"
         @input="onInput"
         :class="{ 'w-32': small, 'w-full md:w-96': !small }"
         class="p-1 border rounded-md outline-none hover:shadow-input-hover focus:shadow-input-focus"
