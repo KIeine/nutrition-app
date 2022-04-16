@@ -2,6 +2,8 @@
 import IngredientsAddModal from '@/components/IngredientsAddModal.vue';
 import { Ingredient } from '@/features/useTypes';
 
+import IngredientsTable from '@/components/IngredientsTable.vue';
+
 const { ingredients = [] } = defineProps<{
   ingredients: Ingredient[];
 }>();
@@ -28,8 +30,6 @@ const onCloseModal = () => {
 
     <IngredientsAddModal v-if="showModal" @close="onCloseModal" />
 
-    <div v-for="ingredient in ingredients">
-      {{ ingredient.name }}
-    </div>
+    <IngredientsTable class="mt-20" :ingredients="ingredients" />
   </div>
 </template>
