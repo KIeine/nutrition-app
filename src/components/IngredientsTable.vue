@@ -1,11 +1,15 @@
 <script setup lang="ts" name="IngredientsTable">
-import { Ingredient } from '@/features/useTypes';
+import { Ingredient, laravelPagination } from '@/features/useTypes';
 
 import BaseTable from './BaseTable.vue';
 
-const { ingredients } = defineProps<{
-  ingredients: Ingredient[];
-}>();
+type Props = {
+  ingredients: laravelPagination & {
+    data: Ingredient[];
+  };
+};
+
+const { ingredients } = defineProps<Props>();
 
 const headers = [
   { title: 'Image', key: 'image' },
@@ -20,5 +24,9 @@ const headers = [
 </script>
 
 <template>
-  <BaseTable :headers="headers" :items="ingredients"></BaseTable>
+  <BaseTable
+    :headers="headers"
+    :items="ingredients.data"
+    :pagination="ingredients"
+  />
 </template>

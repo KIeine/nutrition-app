@@ -1,12 +1,16 @@
 <script setup lang="ts" name="IngredientsIndex">
-import IngredientsAddModal from '@/components/IngredientsAddModal.vue';
-import { Ingredient } from '@/features/useTypes';
+import { Ingredient, laravelPagination } from '@/features/useTypes';
 
+import IngredientsAddModal from '@/components/IngredientsAddModal.vue';
 import IngredientsTable from '@/components/IngredientsTable.vue';
 
-const { ingredients = [] } = defineProps<{
-  ingredients: Ingredient[];
-}>();
+type Props = {
+  ingredients: laravelPagination & {
+    data: Ingredient[];
+  };
+};
+
+const { ingredients } = defineProps<Props>();
 
 let showModal = $ref(false);
 
