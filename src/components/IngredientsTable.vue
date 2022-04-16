@@ -8,14 +8,14 @@ const { ingredients } = defineProps<{
 }>();
 
 const headers = [
-  'image',
-  'name',
-  'calories',
-  'carbs',
-  'fat',
-  'protein',
-  'fiber',
-  'sugar',
+  { title: 'Image', key: 'image' },
+  { title: 'Name', key: 'name' },
+  { title: 'Calories', key: 'calories' },
+  { title: 'Carbs', key: 'carbohydrates' },
+  { title: 'Protein', key: 'protein' },
+  { title: 'Fat', key: 'fat' },
+  { title: 'Sugar', key: 'sugar' },
+  { title: 'Fiber', key: 'fiber' },
 ];
 </script>
 
