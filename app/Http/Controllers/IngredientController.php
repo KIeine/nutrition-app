@@ -45,7 +45,7 @@ class IngredientController extends Controller
             $name = time() . '.' . $image->getClientOriginalExtension();
 
             $path = Storage::disk('public')->putFileAs('ingredients', $image, $name);
-            $validated['image'] = $path;
+            $validated['image'] = "/$path";
         }
 
         Ingredient::create($validated);
@@ -60,7 +60,8 @@ class IngredientController extends Controller
      */
     public function show($id)
     {
-        //
+        $ingredient = Ingredient::findOrFail($id);
+        return inertia('IngredientsShow', ['ingredient' => $ingredient]);
     }
 
     /**

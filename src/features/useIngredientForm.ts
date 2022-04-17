@@ -41,6 +41,7 @@ export const useIngredientForm = () => {
       title: 'Serving size (in grams)',
       type: 'number',
       min: 0,
+      required: true,
       error: form.errors.serving_grams,
     },
     carbohydrates: {

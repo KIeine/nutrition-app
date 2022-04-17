@@ -22,6 +22,7 @@ Route::get('/home', HomeController::class)->name('home');
 
 Route::controller(IngredientController::class)->group(function () {
     Route::get('/ingredients', 'index')->name('ingredients.index');
+    Route::get('/ingredients/{ingredient}', 'show')->name('ingredients.show');
     Route::post('/ingredients', 'store')->name('ingredients.store');
 });
 

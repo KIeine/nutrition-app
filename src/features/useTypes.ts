@@ -11,6 +11,8 @@ export type Ingredient = {
   id: number;
   name: string;
   description: string;
+  serving_name: string;
+  serving_size: number;
   image: string;
 } & Calories;
 

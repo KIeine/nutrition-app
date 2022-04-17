@@ -27,7 +27,7 @@ class IngredientPostRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             'serving_name' => 'nullable|string|max:255',
-            'serving_grams' => 'nullable|numeric|gte:0',
+            'serving_grams' => 'required|numeric|gte:0',
             'calories' => 'required|numeric|gte:0',
             'carbohydrates' => 'required|numeric|gte:0',
             'fat' => 'required|numeric|gte:0',

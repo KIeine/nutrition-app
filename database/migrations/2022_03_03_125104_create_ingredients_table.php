@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('serving_name')->default('serving');
-            $table->string('serving_grams')->nullable();
+            $table->float('serving_grams');
             $table->float('carbohydrates');
             $table->float('protein');
             $table->float('fat');
