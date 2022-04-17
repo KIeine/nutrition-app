@@ -11,7 +11,7 @@ import MealsTable from '@/components/MealsTable.vue';
 
 type Props = {
   meals: laravelPagination & {
-    data: Meal & Calories[];
+    data: (Meal & Calories)[];
   };
   ingredients: Ingredient[];
 };
@@ -42,6 +42,6 @@ const onCloseModal = () => {
 
     <MealsAddModal v-if="showModal" @close="onCloseModal" />
 
-    <MealsTable class="mt-20" :meals="meals" />
+    <MealsTable v-if="meals.data.length" class="mt-20" :meals="meals" />
   </div>
 </template>

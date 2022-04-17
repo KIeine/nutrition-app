@@ -9,8 +9,6 @@ type Props = {
   };
 };
 
-const { ingredients } = defineProps<Props>();
-
 const headers = [
   { title: 'Image', key: 'image' },
   { title: 'Title', key: 'name' },
@@ -21,12 +19,21 @@ const headers = [
   { title: 'Sugar', key: 'sugar' },
   { title: 'Fiber', key: 'fiber' },
 ];
+
+const { ingredients } = defineProps<Props>();
+
+const ingredientsLinked = computed(() =>
+  ingredients.data.map((item) => ({
+    ...item,
+    link: `/ingredients/${item.id}`,
+  })),
+);
 </script>
 
 <template>
   <BaseTable
     :headers="headers"
-    :items="ingredients.data"
+    :items="ingredientsLinked"
     :pagination="ingredients"
   />
 </template>

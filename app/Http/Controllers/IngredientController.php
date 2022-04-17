@@ -16,7 +16,7 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        $ingredients = Ingredient::paginate(15);
+        $ingredients = Ingredient::paginate(10);
         return inertia('IngredientsIndex', ['ingredients' => $ingredients]);
     }
 

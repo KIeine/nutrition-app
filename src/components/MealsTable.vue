@@ -5,7 +5,7 @@ import BaseTable from './BaseTable.vue';
 
 type Props = {
   meals: laravelPagination & {
-    data: Meal & Calories[];
+    data: (Meal & Calories)[];
   };
 };
 
@@ -21,8 +21,15 @@ const headers = [
   { title: 'Sugar', key: 'sugar' },
   { title: 'Fiber', key: 'fiber' },
 ];
+
+const mealsLinked = computed(() =>
+  meals.data.map((item) => ({
+    ...item,
+    link: `/meals/${item.id}`,
+  })),
+);
 </script>
 
 <template>
-  <BaseTable :headers="headers" :items="meals.data" :pagination="meals" />
+  <BaseTable :headers="headers" :items="mealsLinked" :pagination="meals" />
 </template>

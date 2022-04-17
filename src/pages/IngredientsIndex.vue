@@ -34,6 +34,10 @@ const onCloseModal = () => {
 
     <IngredientsAddModal v-if="showModal" @close="onCloseModal" />
 
-    <IngredientsTable class="mt-20" :ingredients="ingredients" />
+    <IngredientsTable
+      v-if="ingredients.data.length"
+      class="mt-20"
+      :ingredients="ingredients"
+    />
   </div>
 </template>

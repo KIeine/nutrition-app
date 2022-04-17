@@ -36,7 +36,13 @@ const imageSrc = computed(
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.id" class="border-x-2">
+        <component
+          v-for="item in items"
+          :key="item.id"
+          :is="item.link ? 'InertiaLink' : 'tr'"
+          :href="item.link"
+          class="table-row border-x-2 hover:bg-gray-100"
+        >
           <td
             v-for="header in headers"
             class="text-lg font-light align-top border-b-2"
@@ -50,7 +56,7 @@ const imageSrc = computed(
 
             <span class="p-3" v-else>{{ item[header.key] ?? '-' }}</span>
           </td>
-        </tr>
+        </component>
       </tbody>
     </table>
 
