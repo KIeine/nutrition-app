@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MealController;
@@ -17,17 +18,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', fn () => to_route('home'));
-
 Route::get('/home', HomeController::class)->name('home');
+
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'create')->name('login');
+    Route::post('/login', 'store')->name('login');
+    Route::post('/logout', 'destroy')->name('logout')->middleware('auth');
+});
 
 Route::controller(IngredientController::class)->group(function () {
     Route::get('/ingredients', 'index')->name('ingredients.index');
     Route::get('/ingredients/{ingredient}', 'show')->name('ingredients.show');
-    Route::post('/ingredients', 'store')->name('ingredients.store');
+    Route::post('/ingredients', 'store')->name('ingredients.store')->middleware('auth');
 });
 
 Route::controller(MealController::class)->group(function () {
     Route::get('/meals', 'index')->name('meals.index');
     Route::get('/meals/{meal}', 'show')->name('meals.show');
-    Route::post('/meals', 'store')->name('meals.store');
+    Route::post('/meals', 'store')->name('meals.store')->middleware('auth');
 });
