@@ -31,7 +31,11 @@ const onRemove = (id: number) => {
       class="flex items-center p-1 rounded-md group hover:bg-gray-100 hover:cursor-pointer"
       @click.stop="onRemove(ingredient.id)"
     >
-      <img :src="ingredient.image" alt="" class="w-16 h-16 rounded-lg" />
+      <img
+        :src="ingredient.image ?? '/images/placeholder.png'"
+        alt=""
+        class="w-16 h-16 rounded-lg"
+      />
 
       <div class="flex flex-col ml-2 space-y-1">
         <span class="w-32">{{ ingredient.name }}</span>
