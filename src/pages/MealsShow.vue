@@ -45,13 +45,11 @@ const imageSrc = computed(() => meal.image ?? '/images/placeholder.png');
       <MealIngredientsList class="w-1/2" :ingredients="ingredients" />
     </div>
 
-    <div>
+    <div class="space-y-4">
       <h5 class="mt-10 text-lg font-semibold">
         Recipe description and directions
       </h5>
-      <p>
-        {{ meal.description }}
-      </p>
+      <p class="whitespace-pre-wrap">{{ meal.description }}</p>
     </div>
   </div>
 </template>
