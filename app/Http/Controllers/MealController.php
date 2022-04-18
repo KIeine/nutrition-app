@@ -64,7 +64,20 @@ class MealController extends Controller
     public function show($id)
     {
         $meal = Meal::findOrFail($id);
-        $ingredients = $meal->ingredients;
+        $ingredients = $meal->ingredients->map(fn ($ingredient) => [
+            'id' => $ingredient->id,
+            'name' => $ingredient->name,
+            'calories' => $ingredient->calories,
+            'carbohydrates' => $ingredient->carbohydrates,
+            'protein' => $ingredient->protein,
+            'fat' => $ingredient->fat,
+            'sugar' => $ingredient->sugar,
+            'fiber' => $ingredient->fiber,
+            'serving_name' => $ingredient->serving_name,
+            'serving_grams' => $ingredient->serving_grams,
+            'notes' => $ingredient->pivot->notes,
+            'serving_quantity' => $ingredient->pivot->serving_quantity,
+        ]);
 
         return inertia('MealsShow', [
             'meal' => $meal,

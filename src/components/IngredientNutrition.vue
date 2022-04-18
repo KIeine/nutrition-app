@@ -18,7 +18,7 @@ const { nutritionalItems, chartOptions } = useNutritionalInfo(ingredient);
 
       <div class="flex justify-between mt-6">
         <p>One {{ ingredient.serving_name }}:</p>
-        <p>{{ ingredient.serving_size }} g</p>
+        <p>{{ ingredient.serving_grams }} g</p>
       </div>
 
       <div class="text-sm font-light">

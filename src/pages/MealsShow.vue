@@ -1,19 +1,16 @@
 <script setup lang="ts" name="MealsShow">
-import { Ingredient, Meal } from '@/features/useTypes';
+import { Calories, Ingredient, Meal } from '@/features/useTypes';
 
 import MealNutrition from '@/components/MealNutrition.vue';
+import MealIngredientsList from '@/components/MealIngredientsList.vue';
 
 type Props = {
   meal: Meal;
-  ingredients: Ingredient[];
-  totals: {
-    calories: number;
-    carbohydrates: number;
-    protein: number;
-    fat: number;
-    fiber?: number;
-    sugar?: number;
-  };
+  totals: Calories;
+  ingredients: (Ingredient & {
+    serving_quantity: number;
+    notes?: string;
+  })[];
 };
 
 const { meal, ingredients, totals } = defineProps<Props>();
@@ -43,8 +40,9 @@ const imageSrc = computed(() => meal.image ?? '/images/placeholder.png');
       </div>
     </div>
 
-    <div class="mt-10">
+    <div class="flex mt-10 space-x-10">
       <MealNutrition class="w-1/2" :totals="totals" />
+      <MealIngredientsList class="w-1/2" :ingredients="ingredients" />
     </div>
 
     <div>
