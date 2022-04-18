@@ -17,13 +17,6 @@ import BaseButton from './components/BaseButton.vue';
 
 use([CanvasRenderer, PieChart, TooltipComponent]);
 
-// TODO fix ziggy's route() not working in template
-declare global {
-  interface Window {
-    route?: any;
-  }
-}
-
 createInertiaApp({
   resolve: async (name) => {
     const page = (await import(`./pages/${name}.vue`)).default;
@@ -33,8 +26,6 @@ createInertiaApp({
   setup({ el, app, props, plugin }) {
     createApp({ render: () => h(app, props) })
       .use(plugin)
-      // ziggy
-      .mixin({ methods: { route: window.route } })
       // inertia
       .component('InertiaLink', Link)
       .component('InertiaHead', Head)

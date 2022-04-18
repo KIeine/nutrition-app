@@ -23,7 +23,6 @@ const onClose = () => {
 const onSubmit = () => {
   emit('submit');
 };
-// TODO submit with key combination
 </script>
 
 <template>
