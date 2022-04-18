@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('meals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('created_by')->constrained('users');
             $table->string('title');
             $table->string('type');
             $table->text('description');
