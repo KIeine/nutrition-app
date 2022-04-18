@@ -1,4 +1,5 @@
 <script setup lang="ts" name="IngredientsShow">
+import { useIngredientShow } from '@/features/useIngredientShow';
 import { Ingredient } from '@/features/useTypes';
 
 const { ingredient } = defineProps<{
@@ -7,37 +8,7 @@ const { ingredient } = defineProps<{
 
 const imageSrc = computed(() => ingredient.image ?? '/images/placeholder.png');
 
-const nutritionalItems = computed(() => [
-  {
-    label: 'Calories',
-    value: ingredient.calories,
-  },
-  {
-    label: 'Carbohydrates',
-    value: ingredient.carbohydrates,
-    postfix: ' g',
-  },
-  {
-    label: 'Protein',
-    value: ingredient.protein,
-    postfix: ' g',
-  },
-  {
-    label: 'Fat',
-    value: ingredient.fat,
-    postfix: ' g',
-  },
-  {
-    label: 'Fiber',
-    value: ingredient.fiber ?? '-',
-    postfix: ' g',
-  },
-  {
-    label: 'Sugar',
-    value: ingredient.sugar ?? '-',
-    postfix: ' g',
-  },
-]);
+const { nutritionalItems, chartOptions } = useIngredientShow(ingredient);
 </script>
 
 <template>
@@ -62,8 +33,8 @@ const nutritionalItems = computed(() => [
       {{ ingredient.description }}
     </p>
 
-    <div class="flex justify-between mt-10">
-      <div>
+    <div class="flex flex-col w-1/2 mt-10 space-y-10">
+      <div class="max-w-max">
         <p class="text-lg font-semibold">
           Nutritional information per {{ ingredient.serving_name }}
         </p>
@@ -84,7 +55,9 @@ const nutritionalItems = computed(() => [
         </div>
       </div>
 
-      <div class="w-1/2">pie chart</div>
+      <div>
+        <EChart class="h-72" :option="chartOptions" />
+      </div>
     </div>
   </div>
 </template>
