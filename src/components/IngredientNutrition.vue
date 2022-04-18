@@ -10,12 +10,13 @@ const { nutritionalItems, chartOptions } = useIngredientShow(ingredient);
 </script>
 
 <template>
-  <div class="flex flex-col w-1/2 mt-10 space-y-10">
+  <div class="flex flex-col w-1/2 space-y-10">
     <div class="max-w-max">
-      <p class="text-lg font-semibold">
+      <h5 class="text-lg font-semibold">
         Nutritional information per {{ ingredient.serving_name }}
-      </p>
-      <div class="flex justify-between">
+      </h5>
+
+      <div class="flex justify-between mt-6">
         <p>One {{ ingredient.serving_name }}:</p>
         <p>{{ ingredient.serving_size }} g</p>
       </div>

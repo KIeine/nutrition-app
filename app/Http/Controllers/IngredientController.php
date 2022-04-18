@@ -61,7 +61,19 @@ class IngredientController extends Controller
     public function show($id)
     {
         $ingredient = Ingredient::findOrFail($id);
-        return inertia('IngredientsShow', ['ingredient' => $ingredient]);
+
+        $meals = $ingredient->meals->sortBy('createdAt')->take(5)->map(
+            fn ($meal) => [
+                'id' => $meal->id,
+                'title' => $meal->title,
+                'image' => $meal->image,
+            ]
+        )->all();
+
+        return inertia('IngredientsShow', [
+            'ingredient' => $ingredient,
+            'meals' => $meals
+        ]);
     }
 
     /**

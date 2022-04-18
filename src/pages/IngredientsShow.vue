@@ -1,10 +1,12 @@
 <script setup lang="ts" name="IngredientsShow">
-import { Ingredient } from '@/features/useTypes';
+import { Ingredient, Meal } from '@/features/useTypes';
 
 import IngredientNutrition from '@/components/IngredientNutrition.vue';
+import IngredientMealsList from '../components/IngredientMealsList.vue';
 
 const { ingredient } = defineProps<{
   ingredient: Ingredient;
+  meals?: Meal[];
 }>();
 
 const imageSrc = computed(() => ingredient.image ?? '/images/placeholder.png');
@@ -32,6 +34,9 @@ const imageSrc = computed(() => ingredient.image ?? '/images/placeholder.png');
       {{ ingredient.description }}
     </p>
 
-    <IngredientNutrition :ingredient="ingredient" />
+    <div class="flex mt-20 space-x-10">
+      <IngredientNutrition :ingredient="ingredient" />
+      <IngredientMealsList :meals="meals" />
+    </div>
   </div>
 </template>
