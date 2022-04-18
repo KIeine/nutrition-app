@@ -29,7 +29,7 @@ const { meals = [] } = defineProps<{
       </InertiaLink>
     </div>
 
-    <p v-if="!meals.length" class="mt-2 text-gray-500">
+    <p v-if="!meals.length" class="text-gray-500">
       No meals using this ingredient have been created yet.
     </p>
   </div>

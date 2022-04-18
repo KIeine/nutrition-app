@@ -60,4 +60,23 @@ class MealController extends Controller
 
         return redirect()->back();
     }
+
+    public function show($id)
+    {
+        $meal = Meal::findOrFail($id);
+        $ingredients = $meal->ingredients;
+
+        return inertia('MealsShow', [
+            'meal' => $meal,
+            'ingredients' => $ingredients,
+            'totals' => [
+                'calories' => $ingredients->sum('calories'),
+                'carbohydrates' => $ingredients->sum('carbohydrates'),
+                'protein' => $ingredients->sum('protein'),
+                'fat' => $ingredients->sum('fat'),
+                'fiber' => $ingredients->sum('fiber'),
+                'sugar' => $ingredients->sum('sugar'),
+            ]
+        ]);
+    }
 }

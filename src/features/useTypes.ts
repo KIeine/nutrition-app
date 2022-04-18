@@ -3,8 +3,8 @@ export type Calories = {
   carbohydrates: number;
   protein: number;
   fat: number;
-  sugar: number;
-  fiber: number;
+  sugar?: number;
+  fiber?: number;
 };
 
 export type Ingredient = {

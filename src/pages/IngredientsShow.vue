@@ -17,7 +17,7 @@ const imageSrc = computed(() => ingredient.image ?? '/images/placeholder.png');
     <InertiaHead :title="`Ingredients | ${ingredient.name}`" />
     <InertiaLink href="/ingredients">
       <BaseButton theme="secondary" icon="arrow-left">
-        Back to Ingredients
+        Back to ingredients
       </BaseButton>
     </InertiaLink>
 

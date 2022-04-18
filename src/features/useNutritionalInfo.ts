@@ -1,34 +1,34 @@
-import { Ingredient } from './useTypes';
+import { Calories } from './useTypes';
 
-export const useIngredientShow = (ingredient: Ingredient) => {
+export const useNutritionalInfo = (food: Calories) => {
   const nutritionalItems = computed(() => [
     {
       label: 'Calories',
-      value: ingredient.calories,
+      value: food.calories,
     },
     {
       label: 'Carbohydrates',
-      value: ingredient.carbohydrates,
+      value: food.carbohydrates,
       postfix: ' g',
     },
     {
       label: 'Protein',
-      value: ingredient.protein,
+      value: food.protein,
       postfix: ' g',
     },
     {
       label: 'Fat',
-      value: ingredient.fat,
+      value: food.fat,
       postfix: ' g',
     },
     {
       label: 'Fiber',
-      value: ingredient.fiber ?? '-',
+      value: food.fiber ?? '-',
       postfix: ' g',
     },
     {
       label: 'Sugar',
-      value: ingredient.sugar ?? '-',
+      value: food.sugar ?? '-',
       postfix: ' g',
     },
   ]);
@@ -47,9 +47,9 @@ export const useIngredientShow = (ingredient: Ingredient) => {
       },
       center: ['200px', '50%'],
       data: [
-        { name: 'Carbohydrates', value: ingredient.carbohydrates },
-        { name: 'Protein', value: ingredient.protein },
-        { name: 'Fat', value: ingredient.fat },
+        { name: 'Carbohydrates', value: food.carbohydrates },
+        { name: 'Protein', value: food.protein },
+        { name: 'Fat', value: food.fat },
       ],
     },
   };

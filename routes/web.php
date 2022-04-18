@@ -28,5 +28,6 @@ Route::controller(IngredientController::class)->group(function () {
 
 Route::controller(MealController::class)->group(function () {
     Route::get('/meals', 'index')->name('meals.index');
+    Route::get('/meals/{meal}', 'show')->name('meals.show');
     Route::post('/meals', 'store')->name('meals.store');
 });
