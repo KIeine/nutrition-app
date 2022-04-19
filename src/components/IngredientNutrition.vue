@@ -6,7 +6,7 @@ const { ingredient } = defineProps<{
   ingredient: Ingredient;
 }>();
 
-const { nutritionalItems, chartOptions } = useNutritionalInfo(ingredient);
+const nutritionalInfo = computed(() => useNutritionalInfo(ingredient));
 </script>
 
 <template>
@@ -23,7 +23,7 @@ const { nutritionalItems, chartOptions } = useNutritionalInfo(ingredient);
 
       <div class="text-sm font-light">
         <div
-          v-for="item in nutritionalItems"
+          v-for="item in nutritionalInfo.items"
           :key="item.label"
           class="flex items-center justify-between"
         >
@@ -34,7 +34,7 @@ const { nutritionalItems, chartOptions } = useNutritionalInfo(ingredient);
     </div>
 
     <div>
-      <EChart class="h-72" :option="chartOptions" />
+      <EChart class="h-72" :option="nutritionalInfo.chartOptions" />
     </div>
   </div>
 </template>

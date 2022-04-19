@@ -1,18 +1,19 @@
 import { useForm } from '@inertiajs/inertia-vue3';
+import { Ingredient } from './useTypes';
 
-export const useIngredientForm = () => {
+export const useIngredientForm = (ingredient: Ingredient | undefined) => {
   const form = useForm({
-    name: null,
-    description: '',
-    serving_name: 'serving',
-    serving_grams: null,
-    carbohydrates: null,
-    protein: null,
-    fat: null,
-    sugar: null,
-    fiber: null,
-    calories: null,
-    image: null,
+    name: ingredient?.name ?? '',
+    description: ingredient?.description ?? '',
+    serving_name: ingredient?.serving_name ?? 'serving',
+    serving_grams: ingredient?.serving_grams ?? null,
+    carbohydrates: ingredient?.carbohydrates ?? null,
+    protein: ingredient?.protein ?? null,
+    fat: ingredient?.fat ?? null,
+    sugar: ingredient?.sugar ?? null,
+    fiber: ingredient?.fiber ?? null,
+    calories: ingredient?.calories ?? null,
+    image: ingredient?.image ?? null,
   });
 
   const schema = computed(() => ({

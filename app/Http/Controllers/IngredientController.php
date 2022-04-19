@@ -21,16 +21,6 @@ class IngredientController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -77,26 +67,39 @@ class IngredientController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ingredient $ingredient)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'serving_name' => 'nullable|string|max:255',
+            'serving_grams' => 'required|numeric|gte:0',
+            'calories' => 'required|numeric|gte:0',
+            'carbohydrates' => 'required|numeric|gte:0',
+            'fat' => 'required|numeric|gte:0',
+            'protein' => 'required|numeric|gte:0',
+            'fiber' => 'nullable|numeric|gte:0',
+            'sugar' => 'nullable|numeric|gte:0',
+        ]);
+
+        $image = $request->file('image');
+        if (isset($image)) {
+            $name = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = Storage::disk('public')->putFileAs('ingredients', $image, $name);
+            $validated['image'] = "/$path";
+        }
+
+        $ingredient->update($validated);
+        $ingredient->save();
+
+        return redirect()->back();
     }
 
     /**

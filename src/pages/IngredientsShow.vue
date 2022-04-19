@@ -3,23 +3,47 @@ import { Ingredient, Meal } from '@/features/useTypes';
 
 import IngredientNutrition from '@/components/IngredientNutrition.vue';
 import IngredientMealsList from '../components/IngredientMealsList.vue';
+import IngredientsAddModal from '@/components/IngredientsAddModal.vue';
 
-const { ingredient } = defineProps<{
+const { ingredient, meals = [] } = defineProps<{
   ingredient: Ingredient;
   meals?: Meal[];
 }>();
 
 const imageSrc = computed(() => ingredient.image ?? '/images/placeholder.png');
+
+let showEditModal = $ref(false);
+
+const onEdit = () => {
+  showEditModal = true;
+};
+
+const onCloseModal = () => {
+  showEditModal = false;
+};
 </script>
 
 <template>
   <div>
     <InertiaHead :title="`Ingredients | ${ingredient.name}`" />
-    <InertiaLink href="/ingredients">
-      <BaseButton theme="secondary" icon="arrow-left">
-        Back to ingredients
+    <IngredientsAddModal
+      v-if="showEditModal"
+      title="Edit ingredient"
+      :ingredient="ingredient"
+      @close="onCloseModal"
+    />
+
+    <div class="flex items-center justify-between">
+      <InertiaLink href="/ingredients">
+        <BaseButton theme="secondary" icon="arrow-left">
+          Back to ingredients
+        </BaseButton>
+      </InertiaLink>
+
+      <BaseButton v-if="$page.props.auth" theme="secondary" @click="onEdit">
+        Edit
       </BaseButton>
-    </InertiaLink>
+    </div>
 
     <div class="flex mt-10 space-x-6">
       <img

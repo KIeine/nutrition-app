@@ -1,7 +1,7 @@
 import { Calories } from './useTypes';
 
 export const useNutritionalInfo = (food: Calories) => {
-  const nutritionalItems = computed(() => [
+  const items = $computed(() => [
     {
       label: 'Calories',
       value: food.calories,
@@ -33,7 +33,7 @@ export const useNutritionalInfo = (food: Calories) => {
     },
   ]);
 
-  const chartOptions = {
+  const chartOptions = $computed(() => ({
     tooltip: {
       trigger: 'item',
       formatter: '{b}: {c} g ({d}%)',
@@ -52,7 +52,7 @@ export const useNutritionalInfo = (food: Calories) => {
         { name: 'Fat', value: food.fat },
       ],
     },
-  };
+  }));
 
-  return { nutritionalItems, chartOptions };
+  return { items, chartOptions };
 };

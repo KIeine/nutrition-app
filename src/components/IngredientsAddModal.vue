@@ -1,5 +1,6 @@
 <script setup lang="ts" name="IngredientsAddModal">
 import { useIngredientForm } from '@/features/useIngredientForm';
+import { Ingredient } from '@/features/useTypes';
 
 import FormModal from './FormModal.vue';
 import FormTextField from './FormTextField.vue';
@@ -10,23 +11,36 @@ const emit = defineEmits<{
   (e: 'close'): void;
 }>();
 
-const { form, schema } = useIngredientForm();
+const { title = 'Add an ingredient', ingredient } = defineProps<{
+  title?: string;
+  ingredient?: Ingredient;
+}>();
+
+const { form, schema } = useIngredientForm(ingredient);
 
 const onClose = () => {
   form.reset();
   emit('close');
 };
 
-// TODO error state
 const onSubmit = () => {
-  form.post('/ingredients', {
+  if (!ingredient) {
+    form.post('/ingredients', {
+      onSuccess: onClose,
+    });
+    return;
+  }
+
+  form.post(`/ingredients/${ingredient.id}`, {
+    // @ts-ignore
+    _method: 'put',
     onSuccess: onClose,
   });
 };
 </script>
 
 <template>
-  <FormModal title="Add an ingredient" @close="onClose" @submit="onSubmit">
+  <FormModal :title="title" @close="onClose" @submit="onSubmit">
     <FormTextField v-bind="schema.name" v-model="form.name" />
     <FormTextareaField v-bind="schema.description" v-model="form.description" />
     <FormTextField v-bind="schema.serving_name" v-model="form.serving_name" />

@@ -38,6 +38,7 @@ Route::controller(IngredientController::class)->group(function () {
     Route::get('/ingredients', 'index')->name('ingredients.index');
     Route::get('/ingredients/{ingredient}', 'show')->name('ingredients.show');
     Route::post('/ingredients', 'store')->name('ingredients.store')->middleware('auth');
+    Route::post('/ingredients/{ingredient}', 'update')->name('ingredients.update')->middleware('auth');
 });
 
 Route::controller(MealController::class)->group(function () {
