@@ -111,7 +111,7 @@ class MealController extends Controller
             'notes' => 'nullable|array|max:50',
             'notes.*' => 'nullable|string|max:255',
             'quantities' => 'nullable|array|max:50',
-            'quantities.*' => 'nullable|numeric|gte:0',
+            'quantities.*' => 'nullable|numeric|gte:0.1',
         ]);
 
         $image = $request->file('image');
@@ -122,10 +122,11 @@ class MealController extends Controller
             $validated['image'] = "/$path";
         }
 
-        foreach ($validated['ingredients'] as $ingredient) {
+        foreach ($validated['ingredients'] as $index) {
+            $ingredient = Ingredient::findOrFail($index);
             $meal->ingredients()->updateExistingPivot($ingredient, [
-                'notes' => $validated['notes'][$ingredient] ?? $ingredient->notes,
-                'serving_quantity' => $validated['quantities'][$ingredient] ?? $ingredient->serving_quantity,
+                'notes' => $validated['notes'][$index] ?? $ingredient->notes,
+                'serving_quantity' => $validated['quantities'][$index] ?? $ingredient->serving_quantity,
             ]);
         }
 
