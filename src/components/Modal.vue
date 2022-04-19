@@ -24,7 +24,7 @@ const onClickOutside = (e: MouseEvent) => {
     >
       <div
         ref="contentRef"
-        class="max-w-5xl p-5 bg-white border rounded-lg min-w-[300px]"
+        class="max-w-5xl p-5 bg-white border rounded-lg min-w-[300px] max-h-[95%] overflow-y-scroll"
       >
         <h4 v-if="title" class="mb-10 text-xl text-bold">{{ title }}</h4>
         <slot />
