@@ -20,7 +20,7 @@ const { meals = [] } = defineProps<{
         <img
           :src="meal.image ?? '/images/placeholder.png'"
           alt="meal-image"
-          class="w-20 h-20"
+          class="object-cover w-20 h-20"
         />
 
         <div class="py-2">
