@@ -38,18 +38,7 @@ class IngredientController extends Controller
             $validated['image'] = "/$path";
         }
 
-        Ingredient::create([
-            'name' => $validated['name'],
-            'calories' => round($validated['calories'] * $validated['serving_grams'] / 100, 2),
-            'protein' => round($validated['protein'] * $validated['serving_grams'] / 100, 2),
-            'carbohydrates' => round($validated['carbohydrates'] * $validated['serving_grams'] / 100, 2),
-            'fat' => round($validated['fat'] * $validated['serving_grams'] / 100, 2),
-            'sugar' => round($validated['sugar'] * $validated['serving_grams'] / 100, 2),
-            'fiber' => round($validated['fiber'] * $validated['serving_grams'] / 100, 2),
-            'image' => $validated['image'],
-            'serving_grams' => $validated['serving_grams'],
-            'serving_name' => $validated['serving_name'],
-        ]);
+        Ingredient::create($validated);
         return redirect()->back();
     }
 
@@ -107,18 +96,7 @@ class IngredientController extends Controller
             $validated['image'] = "/$path";
         }
 
-        $ingredient->update([
-            'name' => $validated['name'],
-            'calories' => round($validated['calories'] * $validated['serving_grams'] / 100, 2),
-            'protein' => round($validated['protein'] * $validated['serving_grams'] / 100, 2),
-            'carbohydrates' => round($validated['carbohydrates'] * $validated['serving_grams'] / 100, 2),
-            'fat' => round($validated['fat'] * $validated['serving_grams'] / 100, 2),
-            'sugar' => round($validated['sugar'] * $validated['serving_grams'] / 100, 2),
-            'fiber' => round($validated['fiber'] * $validated['serving_grams'] / 100, 2),
-            'image' => $validated['image'],
-            'serving_grams' => $validated['serving_grams'],
-            'serving_name' => $validated['serving_name'],
-        ]);
+        $ingredient->update($validated);
         $ingredient->save();
 
         return redirect()->back();

@@ -12,7 +12,7 @@ type Props = {
 const headers = [
   { title: 'Image', key: 'image' },
   { title: 'Title', key: 'name' },
-  { title: 'Calories', key: 'calories' },
+  { title: 'Calories (per 100g)', key: 'calories' },
   { title: 'Carbs', key: 'carbohydrates' },
   { title: 'Protein', key: 'protein' },
   { title: 'Fat', key: 'fat' },

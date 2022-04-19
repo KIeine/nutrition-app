@@ -1,5 +1,5 @@
 <script setup lang="ts" name="MealNutrition">
-import { useNutritionalInfo } from '@/features/useNutritionalInfo';
+import { useMealNutritionalInfo } from '@/features/useMealNutritionalInfo';
 import { Calories } from '@/features/useTypes';
 
 import NutrientGroupsTotals from './NutrientGroupsTotals.vue';
@@ -8,7 +8,7 @@ const { totals } = defineProps<{
   totals: Calories;
 }>();
 
-const { items, chartOptions } = useNutritionalInfo(totals);
+const { items, chartOptions } = useMealNutritionalInfo(totals);
 </script>
 
 <template>

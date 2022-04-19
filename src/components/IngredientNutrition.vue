@@ -1,12 +1,14 @@
 <script setup lang="ts" name="IngredientNutrition">
-import { useNutritionalInfo } from '@/features/useNutritionalInfo';
+import { useIngredientNutritionalInfo } from '@/features/useIngredientNutritionalInfo';
 import { Ingredient } from '@/features/useTypes';
 
 const { ingredient } = defineProps<{
   ingredient: Ingredient;
 }>();
 
-const nutritionalInfo = computed(() => useNutritionalInfo(ingredient));
+const nutritionalInfo = computed(() =>
+  useIngredientNutritionalInfo(ingredient),
+);
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 import { Calories } from './useTypes';
 
-export const useNutritionalInfo = (food: Calories) => {
+export const useMealNutritionalInfo = (food: Calories) => {
   const items = $computed(() => [
     {
       label: 'Calories',

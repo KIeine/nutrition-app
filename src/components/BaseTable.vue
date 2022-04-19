@@ -26,7 +26,7 @@ const imageSrc = computed(
       <thead>
         <tr>
           <th
-            class="p-3 text-xl font-light text-left capitalize border-2 border-gray-200"
+            class="p-3 text-xl font-light text-left border-2 border-gray-200"
             v-for="header in headers"
             :key="header.key"
             :class="{ 'w-32': header.key === 'image' }"
