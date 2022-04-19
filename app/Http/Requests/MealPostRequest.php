@@ -32,7 +32,7 @@ class MealPostRequest extends FormRequest
             'notes' => 'nullable|array|max:50',
             'notes.*' => 'nullable|string|max:255',
             'quantities' => 'nullable|array|max:50',
-            'quantities.*' => 'nullable|numeric|gte:0',
+            'quantities.*' => 'nullable|numeric|gte:0.1',
         ];
     }
 }

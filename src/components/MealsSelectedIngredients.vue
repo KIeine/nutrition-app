@@ -53,7 +53,7 @@ const onRemove = (id: number) => {
           id="quantity"
           @click.stop
           type="number"
-          min="0"
+          min="0.1"
           step="0.1"
           placeholder="1"
           v-model="form.quantities[ingredient.id]"

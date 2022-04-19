@@ -47,7 +47,12 @@ const { ingredients } = defineProps<{
               {{ ingredient.serving_quantity }} {{ ingredient.serving_name }}
             </p>
             <p class="text-sm text-gray-500">
-              {{ ingredient.serving_grams * ingredient.serving_quantity }} grams
+              {{
+                Math.round(
+                  ingredient.serving_grams * ingredient.serving_quantity,
+                )
+              }}
+              grams
             </p>
           </div>
         </div>
