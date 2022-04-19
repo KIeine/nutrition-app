@@ -42,7 +42,7 @@ const { ingredients } = defineProps<{
             </p>
           </div>
 
-          <div class="w-20 text-center">
+          <div class="text-center min-w-max">
             <p>
               {{ ingredient.serving_quantity }} {{ ingredient.serving_name }}
             </p>

@@ -13,11 +13,16 @@ type Props = {
     serving_quantity: number;
     notes?: string;
   })[];
+  auth: {
+    submitted_by: string;
+    can_edit: boolean;
+  };
 };
 
 const imageSrc = computed(() => meal.image ?? '/images/placeholder.png');
 
-const { meal, mealIngredients, totals, ingredients } = defineProps<Props>();
+const { meal, mealIngredients, totals, ingredients, auth } =
+  defineProps<Props>();
 
 let showEditModal = $ref(false);
 
@@ -50,7 +55,7 @@ provide('ingredients', ingredients);
         </BaseButton>
       </InertiaLink>
 
-      <BaseButton v-if="$page.props.auth" theme="secondary" @click="onEdit">
+      <BaseButton v-if="auth.can_edit" theme="secondary" @click="onEdit">
         Edit
       </BaseButton>
     </div>
@@ -64,7 +69,9 @@ provide('ingredients', ingredients);
       <div>
         <h2 class="text-2xl font-bold">{{ meal.title }}</h2>
 
-        <p class="text-sm text-gray-400">Submitted by</p>
+        <p class="text-sm text-gray-400">
+          Submitted by {{ auth.submitted_by }}
+        </p>
       </div>
     </div>
 

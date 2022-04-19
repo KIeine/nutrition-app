@@ -32,15 +32,26 @@ const onClose = () => {
   emit('close');
 };
 
+const transformForm = (data: typeof form) => ({
+  ...data,
+  ingredients: data.ingredients.map((i) => i.id),
+});
+
 const onSubmit = () => {
-  form
-    .transform((data) => ({
-      ...data,
-      ingredients: data.ingredients.map((x) => x.id),
-    }))
-    .post('/meals', {
+  if (!meal) {
+    // @ts-ignore
+    form.transform(transformForm).post('/meals', {
       onSuccess: onClose,
     });
+    return;
+  }
+
+  // @ts-ignore
+  form.transform(transformForm).post(`/meals/${meal.id}`, {
+    // @ts-ignore
+    _method: 'put',
+    onSuccess: onClose,
+  });
 };
 
 const onRemoveIngredient = (id: number) => {

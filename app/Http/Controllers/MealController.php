@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MealPostRequest;
 use App\Models\Ingredient;
 use App\Models\Meal;
+use Illuminate\Http\Request;
 use Storage;
 
 class MealController extends Controller
@@ -65,7 +66,7 @@ class MealController extends Controller
     public function show($id)
     {
         $meal = Meal::findOrFail($id);
-        $ingredients = $meal->ingredients->map(fn ($ingredient) => [
+        $mealIngredients = $meal->ingredients->map(fn ($ingredient) => [
             'id' => $ingredient->id,
             'name' => $ingredient->name,
             'calories' => $ingredient->calories,
@@ -82,15 +83,54 @@ class MealController extends Controller
 
         return inertia('MealsShow', [
             'meal' => $meal,
-            'ingredients' => $ingredients,
+            'ingredients' => Ingredient::all(),
+            'mealIngredients' => $mealIngredients,
             'totals' => [
-                'calories' => $ingredients->sum('calories'),
-                'carbohydrates' => $ingredients->sum('carbohydrates'),
-                'protein' => $ingredients->sum('protein'),
-                'fat' => $ingredients->sum('fat'),
-                'fiber' => $ingredients->sum('fiber'),
-                'sugar' => $ingredients->sum('sugar'),
+                'calories' => $mealIngredients->sum('calories'),
+                'carbohydrates' => $mealIngredients->sum('carbohydrates'),
+                'protein' => $mealIngredients->sum('protein'),
+                'fat' => $mealIngredients->sum('fat'),
+                'fiber' => $mealIngredients->sum('fiber'),
+                'sugar' => $mealIngredients->sum('sugar'),
+            ],
+            'auth' => [
+                'submitted_by' => $meal->user->name,
+                'can_edit' => auth()->id() === $meal->user_id,
             ]
         ]);
+    }
+
+    public function update(Request $request, Meal $meal)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|min:3|max:255',
+            'description' => 'required|string|max:2000',
+            'type' => 'required|string|max:255',
+            'ingredients' => 'required|array|max:50',
+            'notes' => 'nullable|array|max:50',
+            'notes.*' => 'nullable|string|max:255',
+            'quantities' => 'nullable|array|max:50',
+            'quantities.*' => 'nullable|numeric|gte:0',
+        ]);
+
+        $image = $request->file('image');
+        if (isset($image)) {
+            $name = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = Storage::disk('public')->putFileAs('meals', $image, $name);
+            $validated['image'] = "/$path";
+        }
+
+        foreach ($validated['ingredients'] as $ingredient) {
+            $meal->ingredients()->updateExistingPivot($ingredient, [
+                'notes' => $validated['notes'][$ingredient] ?? $ingredient->notes,
+                'serving_quantity' => $validated['quantities'][$ingredient] ?? $ingredient->serving_quantity,
+            ]);
+        }
+
+        $meal->update($validated);
+        $meal->save();
+
+        return redirect()->back();
     }
 }

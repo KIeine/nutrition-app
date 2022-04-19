@@ -45,4 +45,5 @@ Route::controller(MealController::class)->group(function () {
     Route::get('/meals', 'index')->name('meals.index');
     Route::get('/meals/{meal}', 'show')->name('meals.show');
     Route::post('/meals', 'store')->name('meals.store')->middleware('auth');
+    Route::post('/meals/{meal}', 'update')->name('meals.update')->middleware('auth');
 });
