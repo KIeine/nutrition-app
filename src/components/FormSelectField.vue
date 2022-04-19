@@ -49,7 +49,11 @@ watch(
         :class="{ 'w-32': small, 'w-full md:w-96': !small }"
         class="p-1 border rounded-md outline-none hover:shadow-input-hover focus:shadow-input-focus"
       >
-        <option v-for="option in options" :value="option.value">
+        <option
+          v-for="option in options"
+          :key="option.label"
+          :value="option.value"
+        >
           {{ option.label }}
         </option>
       </select>

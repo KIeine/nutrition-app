@@ -45,6 +45,7 @@ const imageSrc = computed(
         >
           <td
             v-for="header in headers"
+            :key="header.key"
             class="text-lg font-light align-top border-b-2"
           >
             <img
