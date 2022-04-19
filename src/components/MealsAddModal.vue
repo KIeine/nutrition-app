@@ -60,7 +60,12 @@ const onRemoveIngredient = (id: number) => {
 </script>
 
 <template>
-  <FormModal :title="title" @close="onClose" @submit="onSubmit">
+  <FormModal
+    :isLoading="form.processing"
+    :title="title"
+    @close="onClose"
+    @submit="onSubmit"
+  >
     <FormTextField v-bind="schema.title" v-model="form.title" />
     <FormTextareaField v-bind="schema.description" v-model="form.description" />
     <FormSelectField v-bind="schema.type" v-model="form.type" />

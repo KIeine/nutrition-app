@@ -40,7 +40,12 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <FormModal :title="title" @close="onClose" @submit="onSubmit">
+  <FormModal
+    :isLoading="form.processing"
+    :title="title"
+    @close="onClose"
+    @submit="onSubmit"
+  >
     <FormTextField v-bind="schema.name" v-model="form.name" />
     <FormTextareaField v-bind="schema.description" v-model="form.description" />
     <FormTextField v-bind="schema.serving_name" v-model="form.serving_name" />
