@@ -14,6 +14,7 @@ class Meal extends Model
         'description',
         'type',
         'image',
+        'user_id'
     ];
 
     public function ingredients()
@@ -21,5 +22,10 @@ class Meal extends Model
         return $this->belongsToMany(Ingredient::class)
             ->withPivot('notes', 'serving_quantity')
             ->withTimestamps();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
