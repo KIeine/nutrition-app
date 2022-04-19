@@ -6,7 +6,7 @@ interface Props {
   small?: boolean;
   min?: number;
   required?: boolean;
-  modelValue?: string | null;
+  modelValue?: number | string | null;
   error?: string;
 }
 
