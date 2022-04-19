@@ -37,7 +37,9 @@ const onCloseModal = () => {
     <h1 class="text-2xl font-medium tracking-wide">Meals</h1>
 
     <div class="mt-10">
-      <BaseButton @click="onCreateMeal">Create a meal</BaseButton>
+      <BaseButton v-if="$page.props.auth" @click="onCreateMeal">
+        Create a meal
+      </BaseButton>
     </div>
 
     <MealsAddModal v-if="showModal" @close="onCloseModal" />

@@ -1,5 +1,6 @@
 <script setup lang="ts" name="MealsAddModal">
 import { useMealsForm } from '@/features/useMealsForm';
+import { Ingredient, Meal } from '@/features/useTypes';
 
 import FormModal from './FormModal.vue';
 import FormTextField from './FormTextField.vue';
@@ -13,7 +14,17 @@ const emit = defineEmits<{
   (e: 'close'): void;
 }>();
 
-const { form, schema } = useMealsForm();
+const {
+  title = 'Create a meal',
+  meal,
+  mealIngredients = [],
+} = defineProps<{
+  title?: string;
+  meal?: Meal;
+  mealIngredients?: Ingredient[];
+}>();
+
+const { form, schema } = useMealsForm(meal, mealIngredients);
 
 const onClose = () => {
   form.reset();
@@ -38,7 +49,7 @@ const onRemoveIngredient = (id: number) => {
 </script>
 
 <template>
-  <FormModal title="Create a meal" @close="onClose" @submit="onSubmit">
+  <FormModal :title="title" @close="onClose" @submit="onSubmit">
     <FormTextField v-bind="schema.title" v-model="form.title" />
     <FormTextareaField v-bind="schema.description" v-model="form.description" />
     <FormSelectField v-bind="schema.type" v-model="form.type" />

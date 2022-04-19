@@ -1,11 +1,21 @@
 import { useForm } from '@inertiajs/inertia-vue3';
-import { Ingredient } from './useTypes';
+import { Ingredient, Meal } from './useTypes';
 
 type mealIngredientType = {
   [key: string]: string;
 };
 
-export const useMealsForm = () => {
+const reduceIngredients = (ingredients: Ingredient[], attr: string) =>
+  ingredients.reduce(
+    // @ts-ignore
+    (acc, ingredient) => ({ ...acc, [ingredient.id]: ingredient[attr] }),
+    {},
+  );
+
+export const useMealsForm = (
+  meal: Meal | undefined,
+  mealIngredients: Ingredient[],
+) => {
   const mealTypeOptions = [
     { label: 'Select a type', value: '' },
     { label: 'Breakfast', value: 'breakfast' },
@@ -15,13 +25,17 @@ export const useMealsForm = () => {
   ];
 
   const form = useForm({
-    title: null,
-    description: '',
-    type: mealTypeOptions[0].value,
-    ingredients: <Ingredient[]>[],
-    image: null,
-    notes: <mealIngredientType>{},
-    quantities: <mealIngredientType>{},
+    title: meal?.title ?? '',
+    description: meal?.description ?? '',
+    type: meal?.type ?? mealTypeOptions[0].value,
+    ingredients: mealIngredients,
+    image: meal?.image ?? null,
+    notes: meal
+      ? reduceIngredients(mealIngredients, 'notes')
+      : <mealIngredientType>{},
+    quantities: meal
+      ? reduceIngredients(mealIngredients, 'serving_quantity')
+      : <mealIngredientType>{},
   });
 
   const schema = computed(() => ({
