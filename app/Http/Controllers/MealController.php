@@ -17,12 +17,12 @@ class MealController extends Controller
             'title' => $meal->title,
             'description' => $meal->description,
             'image' => $meal->image,
-            'calories' => $meal->ingredients->sum('calories'),
-            'carbohydrates' => $meal->ingredients->sum('carbohydrates'),
-            'protein' => $meal->ingredients->sum('protein'),
-            'fat' => $meal->ingredients->sum('fat'),
-            'sugar' => $meal->ingredients->sum('sugar'),
-            'fiber' => $meal->ingredients->sum('fiber'),
+            'calories' => round($meal->ingredients->sum('calories'), 2),
+            'carbohydrates' => round($meal->ingredients->sum('carbohydrates'), 2),
+            'protein' => round($meal->ingredients->sum('protein'), 2),
+            'fat' => round($meal->ingredients->sum('fat'), 2),
+            'sugar' => round($meal->ingredients->sum('sugar'), 2),
+            'fiber' => round($meal->ingredients->sum('fiber'), 2),
         ]);
 
         $ingredients = Ingredient::all();
@@ -86,12 +86,12 @@ class MealController extends Controller
             'ingredients' => Ingredient::all(),
             'mealIngredients' => $mealIngredients,
             'totals' => [
-                'calories' => $mealIngredients->sum('calories'),
-                'carbohydrates' => $mealIngredients->sum('carbohydrates'),
-                'protein' => $mealIngredients->sum('protein'),
-                'fat' => $mealIngredients->sum('fat'),
-                'fiber' => $mealIngredients->sum('fiber'),
-                'sugar' => $mealIngredients->sum('sugar'),
+                'calories' => round($mealIngredients->sum('calories'), 2),
+                'carbohydrates' => round($mealIngredients->sum('carbohydrates'), 2),
+                'protein' => round($mealIngredients->sum('protein'), 2),
+                'fat' => round($mealIngredients->sum('fat'), 2),
+                'fiber' => round($mealIngredients->sum('fiber'), 2),
+                'sugar' => round($mealIngredients->sum('sugar'), 2),
             ],
             'auth' => [
                 'submitted_by' => $meal->user->name,
