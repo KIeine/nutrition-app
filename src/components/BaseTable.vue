@@ -3,7 +3,6 @@ import { laravelPagination } from '@/features/useTypes';
 
 import BasePagination from './BasePagination.vue';
 
-// TODO: Add type for items
 type Props = {
   headers: {
     title: string;
