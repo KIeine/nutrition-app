@@ -45,6 +45,14 @@ export const useIngredientForm = (ingredient: Ingredient | undefined) => {
       required: true,
       error: form.errors.serving_grams,
     },
+    calories: {
+      name: 'calories',
+      title: 'Calories (per 100g)',
+      type: 'number',
+      required: true,
+      min: 0,
+      error: form.errors.calories,
+    },
     carbohydrates: {
       name: 'carbohydrates',
       title: 'Carbohydrates',
@@ -83,14 +91,7 @@ export const useIngredientForm = (ingredient: Ingredient | undefined) => {
       min: 0,
       error: form.errors.fiber,
     },
-    calories: {
-      name: 'calories',
-      title: 'Calories',
-      type: 'number',
-      required: true,
-      min: 0,
-      error: form.errors.calories,
-    },
+
     image: {
       name: 'image',
       title: 'Image',
