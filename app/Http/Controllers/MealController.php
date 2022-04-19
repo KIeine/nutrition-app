@@ -41,7 +41,7 @@ class MealController extends Controller
             $name = time() . '.' . $image->getClientOriginalExtension();
 
             $path = Storage::disk('public')->putFileAs('meals', $image, $name);
-            $validated['image'] = $path;
+            $validated['image'] = "/$path";
         }
 
         $meal = Meal::create([
@@ -49,6 +49,7 @@ class MealController extends Controller
             'description' => $validated['description'],
             'type' => $validated['type'],
             'image' => $validated['image'],
+            'user_id' => auth()->id(),
         ]);
 
         foreach ($validated['ingredients'] as $ingredient) {

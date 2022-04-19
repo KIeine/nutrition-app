@@ -28,7 +28,7 @@ class MealPostRequest extends FormRequest
             'description' => 'required|string|max:2000',
             'type' => 'required|string|max:255',
             'ingredients' => 'required|array|max:50',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'notes' => 'nullable|array|max:50',
             'notes.*' => 'nullable|string|max:255',
             'quantities' => 'nullable|array|max:50',
