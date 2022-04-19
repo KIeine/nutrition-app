@@ -75,6 +75,7 @@ class MealController extends Controller
             'fat' => $ingredient->fat,
             'sugar' => $ingredient->sugar,
             'fiber' => $ingredient->fiber,
+            'image' => $ingredient->image,
             'serving_name' => $ingredient->serving_name,
             'serving_grams' => $ingredient->serving_grams,
             'notes' => $ingredient->pivot->notes,
