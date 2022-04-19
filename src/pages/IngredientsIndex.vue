@@ -29,7 +29,9 @@ const onCloseModal = () => {
     <h1 class="text-2xl font-medium tracking-wide">Ingredients</h1>
 
     <div class="mt-10">
-      <BaseButton @click="onAddIngredient">Add an ingredient</BaseButton>
+      <BaseButton v-if="$page.props.auth" @click="onAddIngredient">
+        Add an ingredient
+      </BaseButton>
     </div>
 
     <IngredientsAddModal v-if="showModal" @close="onCloseModal" />
