@@ -83,7 +83,6 @@ class MealController extends Controller
 
         return inertia('MealsShow', [
             'meal' => $meal,
-            'test' => $meal->ingredients,
             'ingredients' => Ingredient::all(),
             'mealIngredients' => $mealIngredients,
             'totals' => $meal->totals,

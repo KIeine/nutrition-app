@@ -31,13 +31,21 @@ class Meal extends Model
 
     public function getTotalsAttribute()
     {
+        $ingredients = $this->ingredients;
+
+        $transformAttribute = function ($attr) use ($ingredients) {
+            return round($ingredients->map(function ($ingredient) use ($attr) {
+                return $ingredient->$attr * $ingredient->pivot->serving_quantity;
+            })->sum(), 2);
+        };
+
         return [
-            'calories' => round($this->ingredients->sum('calories'), 2),
-            'carbohydrates' => round($this->ingredients->sum('carbohydrates'), 2),
-            'protein' => round($this->ingredients->sum('protein'), 2),
-            'fat' => round($this->ingredients->sum('fat'), 2),
-            'sugar' => round($this->ingredients->sum('sugar'), 2),
-            'fiber' => round($this->ingredients->sum('fiber'), 2),
+            'calories' => $transformAttribute('calories'),
+            'carbohydrates' => $transformAttribute('carbohydrates'),
+            'protein' => $transformAttribute('protein'),
+            'fat' => $transformAttribute('fat'),
+            'sugar' => $transformAttribute('sugar'),
+            'fiber' => $transformAttribute('fiber'),
         ];
     }
 }

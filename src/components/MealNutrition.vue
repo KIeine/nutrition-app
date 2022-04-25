@@ -8,7 +8,7 @@ const { totals } = defineProps<{
   totals: Calories;
 }>();
 
-const { items, chartOptions } = useMealNutritionalInfo(totals);
+const nutritionalInfo = computed(() => useMealNutritionalInfo(totals));
 </script>
 
 <template>
@@ -16,11 +16,11 @@ const { items, chartOptions } = useMealNutritionalInfo(totals);
     <div class="max-w-max">
       <h5 class="text-lg font-semibold">Nutritional information per serving</h5>
 
-      <NutrientGroupsTotals :nutritionalItems="items" />
+      <NutrientGroupsTotals :nutritionalItems="nutritionalInfo.items" />
     </div>
 
     <div>
-      <EChart class="h-72" :option="chartOptions" />
+      <EChart class="h-72" :option="nutritionalInfo.chartOptions" />
     </div>
   </div>
 </template>
