@@ -48,10 +48,8 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Ingredient $ingredient)
     {
-        $ingredient = Ingredient::findOrFail($id);
-
         $meals = $ingredient->meals->sortBy('createdAt')->take(5)->map(
             fn ($meal) => [
                 'id' => $meal->id,

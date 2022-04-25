@@ -63,9 +63,8 @@ class MealController extends Controller
         return redirect()->back();
     }
 
-    public function show($id)
+    public function show(Meal $meal)
     {
-        $meal = Meal::findOrFail($id);
         $mealIngredients = $meal->ingredients->map(fn ($ingredient) => [
             'id' => $ingredient->id,
             'name' => $ingredient->name,
@@ -84,16 +83,10 @@ class MealController extends Controller
 
         return inertia('MealsShow', [
             'meal' => $meal,
+            'test' => $meal->ingredients,
             'ingredients' => Ingredient::all(),
             'mealIngredients' => $mealIngredients,
-            'totals' => [
-                'calories' => round($mealIngredients->sum('calories'), 2),
-                'carbohydrates' => round($mealIngredients->sum('carbohydrates'), 2),
-                'protein' => round($mealIngredients->sum('protein'), 2),
-                'fat' => round($mealIngredients->sum('fat'), 2),
-                'fiber' => round($mealIngredients->sum('fiber'), 2),
-                'sugar' => round($mealIngredients->sum('sugar'), 2),
-            ],
+            'totals' => $meal->totals,
             'auth' => [
                 'submitted_by' => $meal->user->name,
                 'can_edit' => auth()->id() === $meal->user_id,
