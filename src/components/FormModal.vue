@@ -32,11 +32,7 @@ const onSubmit = () => {
         <slot />
       </div>
 
-      <div class="my-10 text-sm text-gray-500">
-        <span class="text-red-500">*</span> marked fields are required.
-      </div>
-
-      <div class="flex justify-end space-x-4">
+      <div class="flex justify-end mt-10 space-x-4">
         <BaseButton :disabled="isDisabled" @click="onClose" theme="secondary">
           Cancel
         </BaseButton>
