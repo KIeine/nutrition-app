@@ -35,7 +35,7 @@ class Meal extends Model
 
         $transformAttribute = function ($attr) use ($ingredients) {
             return round($ingredients->map(function ($ingredient) use ($attr) {
-                return $ingredient->$attr * $ingredient->pivot->serving_quantity;
+                return $ingredient->$attr * ($ingredient->serving_grams / 100) * $ingredient->pivot->serving_quantity;
             })->sum(), 2);
         };
 
