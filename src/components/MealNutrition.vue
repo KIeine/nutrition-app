@@ -4,11 +4,12 @@ import { Calories } from '@/features/useTypes';
 
 import NutrientGroupsTotals from './NutrientGroupsTotals.vue';
 
-const { totals } = defineProps<{
+const { totals, type } = defineProps<{
   totals: Calories;
+  type: string;
 }>();
 
-const nutritionalInfo = computed(() => useMealNutritionalInfo(totals));
+const nutritionalInfo = computed(() => useMealNutritionalInfo(totals, type));
 </script>
 
 <template>

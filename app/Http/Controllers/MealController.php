@@ -17,12 +17,7 @@ class MealController extends Controller
             'title' => $meal->title,
             'description' => $meal->description,
             'image' => $meal->image,
-            'calories' => round($meal->ingredients->sum('calories'), 2),
-            'carbohydrates' => round($meal->ingredients->sum('carbohydrates'), 2),
-            'protein' => round($meal->ingredients->sum('protein'), 2),
-            'fat' => round($meal->ingredients->sum('fat'), 2),
-            'sugar' => round($meal->ingredients->sum('sugar'), 2),
-            'fiber' => round($meal->ingredients->sum('fiber'), 2),
+            'totals' => $meal->totals,
         ]);
 
         $ingredients = Ingredient::all();
@@ -68,12 +63,6 @@ class MealController extends Controller
         $mealIngredients = $meal->ingredients->map(fn ($ingredient) => [
             'id' => $ingredient->id,
             'name' => $ingredient->name,
-            'calories' => $ingredient->calories,
-            'carbohydrates' => $ingredient->carbohydrates,
-            'protein' => $ingredient->protein,
-            'fat' => $ingredient->fat,
-            'sugar' => $ingredient->sugar,
-            'fiber' => $ingredient->fiber,
             'image' => $ingredient->image,
             'serving_name' => $ingredient->serving_name,
             'serving_grams' => $ingredient->serving_grams,

@@ -76,7 +76,7 @@ provide('ingredients', ingredients);
     </div>
 
     <div class="flex mt-10 space-x-10">
-      <MealNutrition class="w-1/2" :totals="totals" />
+      <MealNutrition class="w-1/2" :totals="totals" :type="meal.type" />
       <MealIngredientsList class="w-1/2" :ingredients="mealIngredients" />
     </div>
 

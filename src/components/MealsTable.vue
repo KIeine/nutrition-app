@@ -24,7 +24,10 @@ const headers = [
 
 const mealsLinked = computed(() =>
   meals.data.map((item) => ({
-    ...item,
+    ...item.totals,
+    id: item.id,
+    title: item.title,
+    image: item.image,
     link: `/meals/${item.id}`,
   })),
 );

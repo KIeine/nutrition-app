@@ -5,6 +5,7 @@ interface Props {
   title: string;
   small?: boolean;
   min?: number;
+  step?: number;
   required?: boolean;
   modelValue?: number | string | null;
   error?: string;
@@ -16,6 +17,7 @@ const {
   title,
   small = false,
   min = 0,
+  step = 0.01,
   required = false,
   modelValue = '',
   error = '',
@@ -44,7 +46,7 @@ const onInput = (e: Event) => {
         :type="type"
         :required="required"
         :value="modelValue"
-        step="0.01"
+        :step="step"
         @input="onInput"
         :class="{ 'w-32': small, 'w-full md:w-96': !small }"
         class="p-1 border rounded-md outline-none hover:shadow-input-hover focus:shadow-input-focus"

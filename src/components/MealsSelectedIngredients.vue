@@ -34,7 +34,7 @@ const onRemove = (id: number) => {
       <img
         :src="ingredient.image ?? '/images/placeholder.png'"
         alt=""
-        class="w-16 h-16 rounded-lg"
+        class="object-cover w-16 h-16 rounded-lg"
       />
 
       <div class="flex flex-col ml-2 space-y-1">
@@ -53,11 +53,11 @@ const onRemove = (id: number) => {
           id="quantity"
           @click.stop
           type="number"
-          min="0.1"
-          step="0.1"
+          min="0.01"
+          step="0.01"
           placeholder="1"
           v-model="form.quantities[ingredient.id]"
-          class="px-1 border rounded-md outline-none w-14 hover:shadow-input-hover focus:shadow-input-focus"
+          class="w-20 px-1 border rounded-md outline-none hover:shadow-input-hover focus:shadow-input-focus"
         />
       </div>
 

@@ -58,9 +58,5 @@ const { ingredients } = defineProps<{
         </div>
       </InertiaLink>
     </div>
-
-    <p v-if="!ingredients.length" class="text-gray-500">
-      No ingredients using this ingredient have been created yet.
-    </p>
   </div>
 </template>
