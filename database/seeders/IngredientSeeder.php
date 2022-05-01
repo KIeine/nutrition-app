@@ -305,5 +305,137 @@ class IngredientSeeder extends Seeder
             'serving_name' => 'onion',
             'serving_grams' => 200,
         ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Italian sausage',
+            'calories' => 346,
+            'protein' => 14,
+            'carbohydrates' => 1,
+            'fat' => 31,
+            'sugar' => 0,
+            'fiber' => 0,
+            'serving_name' => 'sausage',
+            'serving_grams' => 100,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Broccoli rabe',
+            'calories' => 42,
+            'protein' => 7,
+            'carbohydrates' => 5,
+            'fat' => 1,
+            'sugar' => 0,
+            'fiber' => 4.8,
+            'serving_name' => 'sausage',
+            'serving_grams' => 100,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Chicken breast',
+            'calories' => 165,
+            'protein' => 31,
+            'carbohydrates' => 0,
+            'fat' => 3.6,
+            'sugar' => 0,
+            'fiber' => 4.8,
+            'serving_name' => 'breast',
+            'serving_grams' => 174,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Brussels sprouts',
+            'calories' => 43,
+            'protein' => 3,
+            'carbohydrates' => 9,
+            'fat' => 0,
+            'sugar' => 2,
+            'fiber' => 4,
+            'serving_name' => 'cup',
+            'serving_grams' => 100,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Cucumber',
+            'calories' => 30,
+            'protein' => 3,
+            'carbohydrates' => 6,
+            'fat' => 0,
+            'sugar' => 0,
+            'fiber' => 2,
+            'serving_name' => 'cucumber',
+            'serving_grams' => 200,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Tomato',
+            'calories' => 18,
+            'protein' => 0,
+            'carbohydrates' => 6,
+            'fat' => 0,
+            'sugar' => 0,
+            'fiber' => 2,
+            'serving_name' => 'tomato',
+            'serving_grams' => 50,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Canned chickpeas',
+            'calories' => 210,
+            'protein' => 10,
+            'carbohydrates' => 35,
+            'fat' => 4,
+            'sugar' => 6,
+            'fiber' => 10,
+            'serving_name' => 'can',
+            'serving_grams' => 152,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Ground turkey',
+            'calories' => 210,
+            'protein' => 27,
+            'carbohydrates' => 0,
+            'fat' => 10,
+            'sugar' => 0,
+            'fiber' => 0,
+            'serving_name' => 'serving',
+            'serving_grams' => 100,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Onion',
+            'calories' => 40,
+            'protein' => 1,
+            'carbohydrates' => 9,
+            'fat' => 0,
+            'sugar' => 0,
+            'fiber' => 0,
+            'serving_name' => 'onion',
+            'serving_grams' => 40,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Broccoli',
+            'calories' => 31,
+            'protein' => 2.5,
+            'carbohydrates' => 6,
+            'fat' => 0,
+            'sugar' => 0,
+            'fiber' => 3,
+            'serving_name' => 'broccoli',
+            'serving_grams' => 200,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Rice noodles',
+            'calories' => 109,
+            'protein' => 1,
+            'carbohydrates' => 25,
+            'fat' => 0,
+            'sugar' => 0,
+            'fiber' => 1,
+            'serving_name' => 'cup',
+            'serving_grams' => 200,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Bell pepper',
+            'calories' => 31,
+            'protein' => 1,
+            'carbohydrates' => 6,
+            'fat' => 0,
+            'sugar' => 0,
+            'fiber' => 1,
+            'serving_name' => 'pepper',
+            'serving_grams' => 200,
+        ]);
     }
 }
