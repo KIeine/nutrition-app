@@ -17,6 +17,7 @@ class MealController extends Controller
             'title' => $meal->title,
             'description' => $meal->description,
             'image' => $meal->image,
+            'type' => $meal->type,
             'totals' => $meal->totals,
         ]);
 

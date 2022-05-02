@@ -10,7 +10,9 @@ export const useGeneratorForm = () => {
       name: 'calories',
       title: 'Target calories',
       type: 'number',
+      step: 0,
       required: true,
+      error: form.errors.calories,
     },
   }));
 

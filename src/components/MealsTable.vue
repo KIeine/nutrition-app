@@ -14,6 +14,7 @@ const { meals } = defineProps<Props>();
 const headers = [
   { title: 'Image', key: 'image' },
   { title: 'Title', key: 'title' },
+  { title: 'Type', key: 'type' },
   { title: 'Calories', key: 'calories' },
   { title: 'Carbs', key: 'carbohydrates' },
   { title: 'Protein', key: 'protein' },
@@ -28,6 +29,7 @@ const mealsLinked = computed(() =>
     id: item.id,
     title: item.title,
     image: item.image,
+    type: item.type,
     link: `/meals/${item.id}`,
   })),
 );

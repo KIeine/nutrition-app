@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\GenerateMealsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MealController;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => to_route('home'));
 Route::get('/home', HomeController::class)->name('home');
+
+Route::post('/generate', [GenerateMealsController::class, 'generate'])->name('generate');
 
 Route::middleware('guest')->group(function () {
     Route::controller(LoginController::class)->group(function () {

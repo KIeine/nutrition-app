@@ -1,10 +1,24 @@
 <script setup lang="ts" name="Home">
 import { useGeneratorForm } from '@/features/useGeneratorForm';
+import { Meal } from '@/features/useTypes';
+
 import FormTextField from '@/components/FormTextField.vue';
+import GeneratedMeals from '@/components/GeneratedMeals.vue';
+
+const { totalCalories, breakfast, lunch, dinner } = defineProps<{
+  totalCalories?: number;
+  breakfast?: Meal;
+  lunch?: Meal;
+  dinner?: Meal;
+}>();
 
 const { form, schema } = useGeneratorForm();
 
-const onSubmit = () => {};
+const onSubmit = () => {
+  form.post('/generate', {
+    preserveScroll: true,
+  });
+};
 </script>
 
 <template>
@@ -24,5 +38,13 @@ const onSubmit = () => {};
         </div>
       </form>
     </div>
+
+    <GeneratedMeals
+      class="mt-20"
+      :total-calories="totalCalories"
+      :breakfast="breakfast"
+      :lunch="lunch"
+      :dinner="dinner"
+    />
   </div>
 </template>
