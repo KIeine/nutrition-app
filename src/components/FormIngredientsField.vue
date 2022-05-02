@@ -5,15 +5,20 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: Ingredient[]): void;
 }>();
 
-const { modelValue = [], error = '' } = defineProps<{
+const {
+  modelValue = [],
+  error = '',
+  required = true,
+  ingredients,
+} = defineProps<{
   modelValue?: Ingredient[];
   error?: string;
+  required?: boolean;
+  ingredients: Ingredient[];
 }>();
 
 let ingredientSearch = $ref<string>('');
 let selectedIngredients = $ref<Ingredient[]>(modelValue);
-
-const ingredients = inject<Ingredient[]>('ingredients');
 
 const filteredIngredients = computed(() => {
   const search = ingredientSearch.toLowerCase();
@@ -21,7 +26,7 @@ const filteredIngredients = computed(() => {
     return [];
   }
 
-  return ingredients?.filter((x) => x.name.includes(search));
+  return ingredients?.filter((x) => x.name.toLowerCase().includes(search));
 });
 
 const onSelectIngredient = (ingredient: Ingredient) => {
@@ -46,9 +51,9 @@ watch(
 
 <template>
   <label for="ingredients" class="flex flex-col items-center sm:flex-row">
-    <span class="min-w-[120px] md:mr-20">
-      Ingredients
-      <span class="text-red-500">*</span>
+    <span class="min-w-[200px]">
+      <slot>Ingredients</slot>
+      <span v-if="required" class="text-red-500">*</span>
     </span>
 
     <div class="relative">
@@ -60,7 +65,7 @@ watch(
 
       <div
         v-if="filteredIngredients?.length"
-        class="absolute w-full max-h-[10rem] mt-2 overflow-y-auto bg-white rounded-md shadow"
+        class="absolute w-full max-h-[10rem] mt-2 z-50 overflow-y-auto bg-white rounded-md shadow"
       >
         <div
           v-for="ingredient in filteredIngredients"

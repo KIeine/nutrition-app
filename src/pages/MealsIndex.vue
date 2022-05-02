@@ -18,8 +18,6 @@ type Props = {
 
 const { meals = [], ingredients = [] } = defineProps<Props>();
 
-provide('ingredients', ingredients);
-
 let showModal = $ref(false);
 
 const onCreateMeal = () => {
@@ -42,7 +40,11 @@ const onCloseModal = () => {
       </BaseButton>
     </div>
 
-    <MealsAddModal v-if="showModal" @close="onCloseModal" />
+    <MealsAddModal
+      v-if="showModal"
+      @close="onCloseModal"
+      :ingredients="ingredients"
+    />
 
     <MealsTable v-if="meals.data.length" class="mt-20" :meals="meals" />
   </div>
