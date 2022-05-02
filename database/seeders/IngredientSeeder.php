@@ -437,5 +437,49 @@ class IngredientSeeder extends Seeder
             'serving_name' => 'pepper',
             'serving_grams' => 200,
         ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Rice',
+            'calories' => 130,
+            'protein' => 3,
+            'carbohydrates' => 46,
+            'fat' => 0,
+            'sugar' => 0,
+            'fiber' => 1,
+            'serving_name' => 'cup',
+            'serving_grams' => 210,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Tofu',
+            'calories' => 76,
+            'protein' => 8,
+            'carbohydrates' => 2,
+            'fat' => 5,
+            'sugar' => 0,
+            'fiber' => 1,
+            'serving_name' => 'block',
+            'serving_grams' => 122,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Soy sauce',
+            'calories' => 53,
+            'protein' => 8,
+            'carbohydrates' => 5,
+            'fat' => 0,
+            'sugar' => 0,
+            'fiber' => 0,
+            'serving_name' => 'tbsp',
+            'serving_grams' => 10,
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Honey',
+            'calories' => 304,
+            'protein' => 0,
+            'carbohydrates' => 82,
+            'fat' => 0,
+            'sugar' => 82,
+            'fiber' => 0,
+            'serving_name' => 'cup',
+            'serving_grams' => 340,
+        ]);
     }
 }

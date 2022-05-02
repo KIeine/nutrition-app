@@ -299,7 +299,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Power Greek Salad',
-            'type' => 'Dinner',
+            'type' => 'Lunch',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -437,6 +437,43 @@ class MealSeeder extends Seeder
             'meal_id' => 12,
             'ingredient_id' => 15,
             'serving_quantity' => 2,
+        ]);
+
+        DB::table('meals')->insert([
+            'user_id' => 1,
+            'title' => 'Tofu & Broccoli',
+            'type' => 'Lunch',
+            'description' => 'Description'
+        ]);
+        DB::table('ingredient_meal')->insert([
+            'meal_id' => 13,
+            'ingredient_id' => 39,
+            'serving_quantity' => 1,
+        ]);
+        DB::table('ingredient_meal')->insert([
+            'meal_id' => 13,
+            'ingredient_id' => 40,
+            'serving_quantity' => 2,
+        ]);
+        DB::table('ingredient_meal')->insert([
+            'meal_id' => 13,
+            'ingredient_id' => 21,
+            'serving_quantity' => 1,
+        ]);
+        DB::table('ingredient_meal')->insert([
+            'meal_id' => 13,
+            'ingredient_id' => 36,
+            'serving_quantity' => 1,
+        ]);
+        DB::table('ingredient_meal')->insert([
+            'meal_id' => 13,
+            'ingredient_id' => 41,
+            'serving_quantity' => 3,
+        ]);
+        DB::table('ingredient_meal')->insert([
+            'meal_id' => 13,
+            'ingredient_id' => 42,
+            'serving_quantity' => 0.1,
         ]);
     }
 }
