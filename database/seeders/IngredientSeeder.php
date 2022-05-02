@@ -481,5 +481,16 @@ class IngredientSeeder extends Seeder
             'serving_name' => 'cup',
             'serving_grams' => 340,
         ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Cocoa powder',
+            'calories' => 227,
+            'protein' => 20,
+            'carbohydrates' => 58,
+            'fat' => 14,
+            'sugar' => 2,
+            'fiber' => 33,
+            'serving_name' => 'tbsp',
+            'serving_grams' => 8,
+        ]);
     }
 }

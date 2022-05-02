@@ -475,5 +475,27 @@ class MealSeeder extends Seeder
             'ingredient_id' => 42,
             'serving_quantity' => 0.1,
         ]);
+
+        DB::table('meals')->insert([
+            'user_id' => 1,
+            'title' => 'Chocolate banana smoothie',
+            'type' => 'Breakfast',
+            'description' => 'Description'
+        ]);
+        DB::table('ingredient_meal')->insert([
+            'meal_id' => 14,
+            'ingredient_id' => 2,
+            'serving_quantity' => 1,
+        ]);
+        DB::table('ingredient_meal')->insert([
+            'meal_id' => 14,
+            'ingredient_id' => 9,
+            'serving_quantity' => 1,
+        ]);
+        DB::table('ingredient_meal')->insert([
+            'meal_id' => 14,
+            'ingredient_id' => 43,
+            'serving_quantity' => 1,
+        ]);
     }
 }
