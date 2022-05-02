@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredient;
 use App\Models\Meal;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,7 @@ class GenerateMealsController extends Controller
             'breakfast' => $breakfast,
             'lunch' => $lunch,
             'dinner' => $dinner,
+            'ingredients' => Ingredient::all()
         ]);
     }
 

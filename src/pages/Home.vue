@@ -1,23 +1,47 @@
 <script setup lang="ts" name="Home">
 import { useGeneratorForm } from '@/features/useGeneratorForm';
-import { Meal } from '@/features/useTypes';
+import { Ingredient, Meal } from '@/features/useTypes';
 
 import FormTextField from '@/components/FormTextField.vue';
 import GeneratedMeals from '@/components/GeneratedMeals.vue';
+import FormIngredientsField from '@/components/FormIngredientsField.vue';
+import GenerateMealSelectedIngredients from '@/components/GenerateMealSelectedIngredients.vue';
 
-const { totalCalories, breakfast, lunch, dinner } = defineProps<{
+const { totalCalories, breakfast, lunch, dinner, ingredients } = defineProps<{
   totalCalories?: number;
   breakfast?: Meal;
   lunch?: Meal;
   dinner?: Meal;
+  ingredients: Ingredient[];
 }>();
 
 const { form, schema } = useGeneratorForm();
+
+let excludedIngredients = $ref<Ingredient[]>([]);
+let includedIngredients = $ref<Ingredient[]>([]);
+
+let filterableIngredients = $computed(() =>
+  ingredients.filter(
+    (item) =>
+      // @ts-ignore
+      !excludedIngredients.includes(item) &&
+      // @ts-ignore
+      !includedIngredients.includes(item),
+  ),
+);
 
 const onSubmit = () => {
   form.post('/home', {
     preserveScroll: true,
   });
+};
+
+const onRemoveExcluded = (id: number) => {
+  excludedIngredients = excludedIngredients.filter((x) => x.id !== id);
+};
+
+const onRemoveIncluded = (id: number) => {
+  includedIngredients = includedIngredients.filter((x) => x.id !== id);
 };
 </script>
 
@@ -28,14 +52,42 @@ const onSubmit = () => {
     <div
       class="flex items-center justify-center max-w-2xl p-10 mx-auto mt-20 bg-white rounded-lg shadow-md"
     >
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="onSubmit" class="space-y-4">
         <FormTextField small v-model="form.calories" v-bind="schema.calories" />
 
-        <div class="mt-10">
-          <BaseButton :loading="form.processing" class="w-24 mx-auto">
+        <FormIngredientsField
+          :ingredients="filterableIngredients"
+          :required="false"
+          v-model="excludedIngredients"
+        >
+          Exclude ingredients
+        </FormIngredientsField>
+        <FormIngredientsField
+          :ingredients="filterableIngredients"
+          :required="false"
+          v-model="includedIngredients"
+        >
+          Include ingredients
+        </FormIngredientsField>
+
+        <div>
+          <BaseButton :loading="form.processing" class="w-24 mx-auto mt-10">
             Generate
           </BaseButton>
         </div>
+
+        <GenerateMealSelectedIngredients
+          v-if="excludedIngredients.length"
+          title="Excluded ingredients"
+          :ingredients="excludedIngredients"
+          @remove="onRemoveExcluded"
+        />
+        <GenerateMealSelectedIngredients
+          v-if="includedIngredients.length"
+          title="Included ingredients"
+          :ingredients="includedIngredients"
+          @remove="onRemoveIncluded"
+        />
       </form>
     </div>
 

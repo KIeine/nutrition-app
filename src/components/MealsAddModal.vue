@@ -18,10 +18,12 @@ const {
   title = 'Create a meal',
   meal,
   mealIngredients = [],
+  ingredients,
 } = defineProps<{
   title?: string;
   meal?: Meal;
   mealIngredients?: Ingredient[];
+  ingredients: Ingredient[];
 }>();
 
 const { form, schema } = useMealsForm(meal, mealIngredients);
@@ -73,6 +75,7 @@ const onRemoveIngredient = (id: number) => {
     <FormIngredientsField
       v-bind="schema.ingredients"
       v-model="form.ingredients"
+      :ingredients="ingredients"
     />
 
     <MealsSelectedIngredients
