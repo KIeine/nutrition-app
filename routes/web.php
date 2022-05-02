@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => to_route('home'));
 Route::get('/home', HomeController::class)->name('home');
+Route::post('/home', [GenerateMealsController::class, 'generate'])->name('generate');
 
-Route::post('/generate', [GenerateMealsController::class, 'generate'])->name('generate');
 
 Route::middleware('guest')->group(function () {
     Route::controller(LoginController::class)->group(function () {

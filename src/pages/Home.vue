@@ -15,7 +15,7 @@ const { totalCalories, breakfast, lunch, dinner } = defineProps<{
 const { form, schema } = useGeneratorForm();
 
 const onSubmit = () => {
-  form.post('/generate', {
+  form.post('/home', {
     preserveScroll: true,
   });
 };
