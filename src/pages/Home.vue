@@ -31,9 +31,15 @@ let filterableIngredients = $computed(() =>
 );
 
 const onSubmit = () => {
-  form.post('/home', {
-    preserveScroll: true,
-  });
+  form
+    .transform((data) => ({
+      ...data,
+      exclude: excludedIngredients,
+      include: includedIngredients,
+    }))
+    .post('/home', {
+      preserveScroll: true,
+    });
 };
 
 const onRemoveExcluded = (id: number) => {

@@ -12,13 +12,15 @@ class GenerateMealsController extends Controller
     {
         $validated = $request->validate([
             'calories' => 'required|integer|min:1000',
+            'exclude' => 'nullable|array|max:50',
+            'include' => 'nullable|array|max:50',
         ]);
 
         $mealCalories = $validated['calories'] / 3;
 
-        $breakfasts = $this->filterByCalories('breakfast', $mealCalories);
-        $lunches = $this->filterByCalories('lunch', $mealCalories);
-        $dinners = $this->filterByCalories('dinner', $mealCalories);
+        $breakfasts = $this->filterMeals('breakfast', $mealCalories, $request->get('exclude'), $request->get('include'));
+        $lunches = $this->filterMeals('lunch', $mealCalories, $request->get('exclude'), $request->get('include'));
+        $dinners = $this->filterMeals('dinner', $mealCalories, $request->get('exclude'), $request->get('include'));
 
         $breakfast = $breakfasts ? collect($breakfasts)->random() : null;
         $lunch = $lunches ? collect($lunches)->random() : null;
@@ -31,6 +33,21 @@ class GenerateMealsController extends Controller
             'dinner' => $dinner,
             'ingredients' => Ingredient::all()
         ]);
+    }
+
+    public function filterMeals($type, $mealCalories, $excludedIngredients, $includedIngredients)
+    {
+        $meals = $this->filterByCalories($type, $mealCalories);
+
+        if (count($excludedIngredients)) {
+            $meals = $this->filterByIngredients($meals, $excludedIngredients);
+        }
+
+        if (count($includedIngredients)) {
+            $meals = $this->filterByIngredients($meals, $includedIngredients, false);
+        }
+
+        return $meals;
     }
 
     public function filterByCalories($type, $mealCalories, $error = 200)
@@ -46,6 +63,19 @@ class GenerateMealsController extends Controller
         return array_filter($meals, fn ($item) => ($item['calories']
             <= $mealCalories + $error)
             && $item['calories'] >= $mealCalories - $error);
+    }
+
+    public function filterByIngredients($meals, $ingredients, $exclude = true)
+    {
+        $haystackIds = collect($ingredients)->transform(fn ($ing) => $ing['id'])->toArray();
+
+        $meals = array_filter($meals, function ($meal) use ($haystackIds, $exclude) {
+            $ingredientsId = $meal['ingredients']->map(fn ($i) => $i['id'])->toArray();
+            $result = array_intersect($ingredientsId, $haystackIds) === $haystackIds;
+            return $exclude ? !$result : $result;
+        });
+
+        return $meals;
     }
 
     public function countCalories($breakfast, $lunch, $dinner)
