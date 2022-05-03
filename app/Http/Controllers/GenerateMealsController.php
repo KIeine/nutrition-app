@@ -56,6 +56,7 @@ class GenerateMealsController extends Controller
             'id' => $item->id,
             'title' => $item->title,
             'description' => $item->description,
+            'image' => $item->image,
             'ingredients' => $item->ingredients,
             'calories' => $item->totals['calories'],
         ])->toArray();
@@ -71,7 +72,7 @@ class GenerateMealsController extends Controller
 
         $meals = array_filter($meals, function ($meal) use ($haystackIds, $exclude) {
             $ingredientsId = $meal['ingredients']->map(fn ($i) => $i['id'])->toArray();
-            $result = array_intersect($ingredientsId, $haystackIds) === $haystackIds;
+            $result = count(array_intersect($ingredientsId, $haystackIds)) === count($haystackIds);
             return $exclude ? !$result : $result;
         });
 
