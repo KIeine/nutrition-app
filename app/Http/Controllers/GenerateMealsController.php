@@ -15,6 +15,7 @@ class GenerateMealsController extends Controller
             'error' => 'required|integer|gte:0',
             'exclude' => 'nullable|array|max:50',
             'include' => 'nullable|array|max:50',
+            'personalMeals' => 'required|boolean',
         ]);
 
         $mealCalories = $validated['calories'] / 3;
@@ -22,10 +23,11 @@ class GenerateMealsController extends Controller
         $exclude = $request->get('exclude');
         $include = $request->get('include');
         $error = $request->get('error');
+        $personalMeals = $request->get('personalMeals');
 
-        $breakfasts = $this->filterMeals('breakfast', $mealCalories, $exclude, $include, $error);
-        $lunches = $this->filterMeals('lunch', $mealCalories, $exclude, $include, $error);
-        $dinners = $this->filterMeals('dinner', $mealCalories, $exclude, $include, $error);
+        $breakfasts = $this->filterMeals('breakfast', $mealCalories, $exclude, $include, $error, $personalMeals);
+        $lunches = $this->filterMeals('lunch', $mealCalories, $exclude, $include, $error, $personalMeals);
+        $dinners = $this->filterMeals('dinner', $mealCalories, $exclude, $include, $error, $personalMeals);
 
         $breakfast = $breakfasts ? collect($breakfasts)->random() : null;
         $lunch = $lunches ? collect($lunches)->random() : null;
@@ -40,9 +42,9 @@ class GenerateMealsController extends Controller
         ]);
     }
 
-    public function filterMeals($type, $mealCalories, $excludedIngredients, $includedIngredients, $error)
+    public function filterMeals($type, $mealCalories, $excludedIngredients, $includedIngredients, $error, $personalMeals)
     {
-        $meals = $this->filterByCalories($type, $mealCalories, $error);
+        $meals = $this->filterByCalories($type, $mealCalories, $error, $personalMeals);
 
         if (count($excludedIngredients)) {
             $meals = $this->filterByIngredients($meals, $excludedIngredients);
@@ -55,9 +57,13 @@ class GenerateMealsController extends Controller
         return $meals;
     }
 
-    public function filterByCalories($type, $mealCalories, $error = 200)
+    public function filterByCalories($type, $mealCalories, $error, $personalMeals)
     {
-        $meals = Meal::where('type', $type)->get()->map(fn ($item) => [
+        $filterable = $personalMeals && auth()->user() ?
+            auth()->user()->meals->where('type', $type) :
+            Meal::where('type', $type)->get();
+
+        $meals = $filterable->map(fn ($item) => [
             'id' => $item->id,
             'title' => $item->title,
             'description' => $item->description,

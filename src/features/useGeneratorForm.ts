@@ -4,6 +4,7 @@ export const useGeneratorForm = () => {
   const form = useForm({
     calories: 2000,
     error: 200,
+    personalMeals: false,
   });
 
   const schema = computed(() => ({
@@ -22,6 +23,10 @@ export const useGeneratorForm = () => {
       step: 0,
       required: true,
       error: form.errors.error,
+    },
+    personalMeals: {
+      name: 'personalMeals',
+      title: 'Generate only from my meals',
     },
   }));
 

@@ -6,6 +6,7 @@ import FormTextField from '@/components/FormTextField.vue';
 import GeneratedMeals from '@/components/GeneratedMeals.vue';
 import FormIngredientsField from '@/components/FormIngredientsField.vue';
 import GenerateMealSelectedIngredients from '@/components/GenerateMealSelectedIngredients.vue';
+import FormCheckboxField from '@/components/FormCheckboxField.vue';
 
 const { totalCalories, breakfast, lunch, dinner, ingredients } = defineProps<{
   totalCalories?: number;
@@ -61,6 +62,11 @@ const onRemoveIncluded = (id: number) => {
       <form @submit.prevent="onSubmit" class="space-y-4">
         <FormTextField small v-model="form.calories" v-bind="schema.calories" />
         <FormTextField small v-model="form.error" v-bind="schema.error" />
+        <FormCheckboxField
+          v-if="$page.props.auth"
+          v-model="form.personalMeals"
+          v-bind="schema.personalMeals"
+        />
 
         <FormIngredientsField
           :ingredients="filterableIngredients"

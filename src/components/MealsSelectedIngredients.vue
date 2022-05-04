@@ -38,7 +38,7 @@ const onRemove = (id: number) => {
       />
 
       <div class="flex flex-col ml-2 space-y-1">
-        <span class="w-32">{{ ingredient.name }}</span>
+        <span>{{ ingredient.name }}</span>
         <input
           @click.stop
           placeholder="Notes"
