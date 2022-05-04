@@ -8,7 +8,7 @@ import MealsAddModal from '@/components/MealsAddModal.vue';
 type Props = {
   meal: Meal;
   totals: Calories;
-  ingredients?: Ingredient[];
+  ingredients: Ingredient[];
   mealIngredients: (Ingredient & {
     serving_quantity: number;
     notes?: string;
@@ -45,34 +45,19 @@ provide('ingredients', ingredients);
       title="Edit meal"
       :meal="meal"
       :mealIngredients="mealIngredients"
+      :ingredients="ingredients"
       @close="onCloseModal"
     />
 
-    <div class="flex items-center justify-between">
-      <InertiaLink href="/meals">
-        <BaseButton theme="secondary" icon="arrow-left">
-          Back to meals
-        </BaseButton>
-      </InertiaLink>
+    <div class="flex items-start justify-between">
+      <div class="flex space-x-6">
+        <img :src="imageSrc" alt="meal-image" class="object-cover w-40 h-40" />
+        <h2 class="text-2xl font-bold">{{ meal.title }}</h2>
+      </div>
 
-      <BaseButton v-if="auth.can_edit" theme="secondary" @click="onEdit">
+      <BaseButton v-if="$page.props.auth" theme="secondary" @click="onEdit">
         Edit
       </BaseButton>
-    </div>
-
-    <div class="flex mt-10 space-x-6">
-      <img
-        :src="imageSrc"
-        alt="ingredient-image"
-        class="object-cover w-40 h-40"
-      />
-      <div>
-        <h2 class="text-2xl font-bold">{{ meal.title }}</h2>
-
-        <p class="text-sm text-gray-400">
-          Submitted by {{ auth.submitted_by }}
-        </p>
-      </div>
     </div>
 
     <div class="flex mt-10 space-x-10">
