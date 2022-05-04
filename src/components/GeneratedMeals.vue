@@ -3,12 +3,36 @@ import { Meal } from '@/features/useTypes';
 
 import GeneratedMealItem from './GeneratedMealItem.vue';
 
+const emit = defineEmits<{
+  (e: 'retry', value: string): void;
+}>();
+
 const { totalCalories, breakfast, lunch, dinner } = defineProps<{
   totalCalories?: number;
   breakfast?: Meal;
   lunch?: Meal;
   dinner?: Meal;
 }>();
+
+const onRetry = (type: string) => emit('retry', type);
+
+const sections = $computed(() => [
+  {
+    title: 'Breakfast',
+    retry: 'breakfast',
+    meal: breakfast,
+  },
+  {
+    title: 'Lunch',
+    retry: 'lunch',
+    meal: lunch,
+  },
+  {
+    title: 'Dinner',
+    retry: 'dinner',
+    meal: dinner,
+  },
+]);
 </script>
 
 <template>
@@ -20,17 +44,17 @@ const { totalCalories, breakfast, lunch, dinner } = defineProps<{
     </p>
 
     <div class="space-y-4">
-      <div>
-        <p>Breakfast:</p>
-        <GeneratedMealItem :meal="breakfast" />
-      </div>
-      <div>
-        <p>Lunch:</p>
-        <GeneratedMealItem :meal="lunch" />
-      </div>
-      <div>
-        <p>Dinner:</p>
-        <GeneratedMealItem :meal="dinner" />
+      <div v-for="section in sections" :key="section.title">
+        <div class="flex space-x-2">
+          <p>{{ section.title }}:</p>
+          <BaseIcon
+            icon="retry"
+            class="w-5 h-5 cursor-pointer"
+            @click="onRetry(section.retry)"
+          />
+        </div>
+
+        <GeneratedMealItem :meal="section.meal" />
       </div>
     </div>
   </div>

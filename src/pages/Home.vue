@@ -54,6 +54,20 @@ const onRemoveExcluded = (id: number) => {
 const onRemoveIncluded = (id: number) => {
   includedIngredients = includedIngredients.filter((x) => x.id !== id);
 };
+
+const onRetryMeal = (type: string) => {
+  form
+    .transform((data) => ({
+      ...data,
+      exclude: excludedIngredients,
+      include: includedIngredients,
+      only: type,
+    }))
+    .post('/home', {
+      preserveScroll: true,
+      preserveState: true,
+    });
+};
 </script>
 
 <template>
@@ -115,6 +129,7 @@ const onRemoveIncluded = (id: number) => {
       :breakfast="breakfast"
       :lunch="lunch"
       :dinner="dinner"
+      @retry="onRetryMeal"
     />
   </div>
 </template>

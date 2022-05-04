@@ -16,14 +16,31 @@ class GenerateMealsController extends Controller
             'exclude' => 'nullable|array|max:50',
             'include' => 'nullable|array|max:50',
             'personalMeals' => 'required|boolean',
+            'only' => 'nullable|string'
         ]);
 
         $mealCalories = $validated['calories'] / 3;
 
-        $exclude = $request->get('exclude');
-        $include = $request->get('include');
-        $error = $request->get('error');
-        $personalMeals = $request->get('personalMeals');
+        $exclude = $request->exclude;
+        $include = $request->include;
+        $error = $request->error;
+        $personalMeals = $request->personalMeals;
+        $only = $request->only;
+
+        if (isset($only)) {
+            $values = session('generateMeals');
+
+            $meals = $this->filterMeals($only, $mealCalories, $exclude, $include, $error, $personalMeals);
+            $meal = $meals ? collect($meals)->random() : null;
+
+            $totalNewCalories = $values['totalCalories'] - ($values[$only] ? $values[$only]['calories'] : 0) + $this->countCalories($meal, null, null);
+
+            $values['totalCalories'] = round($totalNewCalories);
+            $values[$only] = $meal;
+
+            $request->session()->put('generateMeals',  $values);
+            return inertia('Home', $values);
+        }
 
         $breakfasts = $this->filterMeals('breakfast', $mealCalories, $exclude, $include, $error, $personalMeals);
         $lunches = $this->filterMeals('lunch', $mealCalories, $exclude, $include, $error, $personalMeals);
@@ -33,13 +50,16 @@ class GenerateMealsController extends Controller
         $lunch = $lunches ? collect($lunches)->random() : null;
         $dinner = $dinners ? collect($dinners)->random() : null;
 
-        return inertia('Home', [
+        $values =  [
             'totalCalories' => $this->countCalories($breakfast, $lunch, $dinner),
             'breakfast' => $breakfast,
             'lunch' => $lunch,
             'dinner' => $dinner,
             'ingredients' => Ingredient::all()
-        ]);
+        ];
+
+        $request->session()->put('generateMeals',  $values);
+        return inertia('Home', $values);
     }
 
     public function filterMeals($type, $mealCalories, $excludedIngredients, $includedIngredients, $error, $personalMeals)
