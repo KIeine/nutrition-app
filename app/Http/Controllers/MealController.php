@@ -106,6 +106,15 @@ class MealController extends Controller
 
         foreach ($validated['ingredients'] as $index) {
             $ingredient = Ingredient::findOrFail($index);
+
+            if (!$meal->ingredients->contains($ingredient)) {
+                $meal->ingredients()->attach($ingredient, [
+                    'notes' => $validated['notes'][$index] ?? null,
+                    'serving_quantity' => $validated['quantities'][$index] ?? 1,
+                ]);
+                continue;
+            }
+
             $meal->ingredients()->updateExistingPivot($ingredient, [
                 'notes' => $validated['notes'][$index] ?? $ingredient->notes,
                 'serving_quantity' => $validated['quantities'][$index] ?? $ingredient->serving_quantity,
