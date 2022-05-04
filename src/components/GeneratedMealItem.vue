@@ -23,7 +23,7 @@ const { meal } = defineProps<{
       <p :title="meal.title" class="font-semibold truncate">
         {{ meal.title }}
       </p>
-      <p>Calories: {{ Math.round(meal.calories) }}</p>
+      <p>Calories: {{ meal.calories }}</p>
     </div>
   </a>
 

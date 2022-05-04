@@ -89,7 +89,7 @@ class GenerateMealsController extends Controller
             'description' => $item->description,
             'image' => $item->image,
             'ingredients' => $item->ingredients,
-            'calories' => $item->totals['calories'],
+            'calories' => round($item->totals['calories']),
         ])->toArray();
 
         return array_filter($meals, fn ($item) => ($item['calories']
