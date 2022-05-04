@@ -27,4 +27,10 @@ class FavouriteController extends Controller
 
         return inertia('Home', session('generateMeals'));
     }
+
+    public function destroy(Favourite $favourite)
+    {
+        $favourite->delete();
+        return redirect()->back();
+    }
 }
