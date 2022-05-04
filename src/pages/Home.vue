@@ -21,6 +21,10 @@ const { form, schema } = useGeneratorForm();
 let excludedIngredients = $ref<Ingredient[]>([]);
 let includedIngredients = $ref<Ingredient[]>([]);
 
+const showMeals = $computed(
+  () => breakfast !== undefined || lunch !== undefined || dinner,
+);
+
 let filterableIngredients = $computed(() =>
   ingredients.filter(
     (item) =>
@@ -105,6 +109,7 @@ const onRemoveIncluded = (id: number) => {
     </div>
 
     <GeneratedMeals
+      v-if="showMeals"
       class="mt-20"
       :total-calories="totalCalories"
       :breakfast="breakfast"
