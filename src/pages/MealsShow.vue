@@ -21,8 +21,7 @@ type Props = {
 
 const imageSrc = computed(() => meal.image ?? '/images/placeholder.png');
 
-const { meal, mealIngredients, totals, ingredients, auth } =
-  defineProps<Props>();
+const { meal, mealIngredients, totals, ingredients } = defineProps<Props>();
 
 let showEditModal = $ref(false);
 
@@ -55,7 +54,7 @@ provide('ingredients', ingredients);
         <h2 class="text-2xl font-bold">{{ meal.title }}</h2>
       </div>
 
-      <BaseButton v-if="$page.props.auth" theme="secondary" @click="onEdit">
+      <BaseButton v-if="auth.can_edit" theme="secondary" @click="onEdit">
         Edit
       </BaseButton>
     </div>
