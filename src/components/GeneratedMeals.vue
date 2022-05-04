@@ -9,6 +9,10 @@ const { totalCalories, breakfast, lunch, dinner } = defineProps<{
   lunch?: Meal;
   dinner?: Meal;
 }>();
+
+const showItems = $computed(
+  () => breakfast !== undefined || lunch !== undefined || dinner,
+);
 </script>
 
 <template>
@@ -19,7 +23,7 @@ const { totalCalories, breakfast, lunch, dinner } = defineProps<{
       Total calories: {{ totalCalories }}
     </p>
 
-    <div v-if="breakfast || lunch || dinner" class="space-y-4">
+    <div v-if="showItems" class="space-y-4">
       <div>
         <p>Breakfast:</p>
         <GeneratedMealItem :meal="breakfast" />

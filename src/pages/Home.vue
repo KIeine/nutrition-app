@@ -60,6 +60,7 @@ const onRemoveIncluded = (id: number) => {
     >
       <form @submit.prevent="onSubmit" class="space-y-4">
         <FormTextField small v-model="form.calories" v-bind="schema.calories" />
+        <FormTextField small v-model="form.error" v-bind="schema.error" />
 
         <FormIngredientsField
           :ingredients="filterableIngredients"

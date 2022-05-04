@@ -12,15 +12,20 @@ class GenerateMealsController extends Controller
     {
         $validated = $request->validate([
             'calories' => 'required|integer|min:1000',
+            'error' => 'required|integer|gte:0',
             'exclude' => 'nullable|array|max:50',
             'include' => 'nullable|array|max:50',
         ]);
 
         $mealCalories = $validated['calories'] / 3;
 
-        $breakfasts = $this->filterMeals('breakfast', $mealCalories, $request->get('exclude'), $request->get('include'));
-        $lunches = $this->filterMeals('lunch', $mealCalories, $request->get('exclude'), $request->get('include'));
-        $dinners = $this->filterMeals('dinner', $mealCalories, $request->get('exclude'), $request->get('include'));
+        $exclude = $request->get('exclude');
+        $include = $request->get('include');
+        $error = $request->get('error');
+
+        $breakfasts = $this->filterMeals('breakfast', $mealCalories, $exclude, $include, $error);
+        $lunches = $this->filterMeals('lunch', $mealCalories, $exclude, $include, $error);
+        $dinners = $this->filterMeals('dinner', $mealCalories, $exclude, $include, $error);
 
         $breakfast = $breakfasts ? collect($breakfasts)->random() : null;
         $lunch = $lunches ? collect($lunches)->random() : null;
@@ -35,9 +40,9 @@ class GenerateMealsController extends Controller
         ]);
     }
 
-    public function filterMeals($type, $mealCalories, $excludedIngredients, $includedIngredients)
+    public function filterMeals($type, $mealCalories, $excludedIngredients, $includedIngredients, $error)
     {
-        $meals = $this->filterByCalories($type, $mealCalories);
+        $meals = $this->filterByCalories($type, $mealCalories, $error);
 
         if (count($excludedIngredients)) {
             $meals = $this->filterByIngredients($meals, $excludedIngredients);
