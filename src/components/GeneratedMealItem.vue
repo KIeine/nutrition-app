@@ -1,14 +1,16 @@
 <script setup lang="ts" name="GeneratedMealItem">
 import { Meal } from '@/features/useTypes';
 
-const { meal } = defineProps<{
+const { meal, inertiaLink = false } = defineProps<{
   meal?: Meal;
+  inertiaLink?: boolean;
 }>();
 </script>
 
 <template>
-  <a
+  <component
     v-if="meal"
+    :is="inertiaLink ? 'InertiaLink' : 'a'"
     target="_blank"
     :href="`/meals/${meal?.id}`"
     class="flex items-center space-x-4 rounded shadow hover:bg-gray-100"
@@ -19,13 +21,13 @@ const { meal } = defineProps<{
       class="object-contain w-20 h-20"
     />
 
-    <div class="space-y-2 w-72">
+    <div class="space-y-2 truncate w-72">
       <p :title="meal.title" class="font-semibold truncate">
         {{ meal.title }}
       </p>
-      <p>Calories: {{ meal.calories }}</p>
+      <p v-if="meal.calories">Calories: {{ meal.calories }}</p>
     </div>
-  </a>
+  </component>
 
   <p v-else>We couldn't find a fitting meal based on your search parameters.</p>
 </template>

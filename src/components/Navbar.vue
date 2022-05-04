@@ -29,6 +29,10 @@ const loginLinks = [
 
 const authLinks = [
   {
+    name: 'Profile',
+    href: '/profile',
+  },
+  {
     name: 'Logout',
     href: '/logout',
     method: 'post',

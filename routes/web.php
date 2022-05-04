@@ -28,6 +28,7 @@ Route::post('/home', [GenerateMealsController::class, 'generate'])->name('genera
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::post('/favourite', [FavouriteController::class, 'store'])->name('favourite');
+    Route::delete('/favourite/{favourite}', [FavouriteController::class, 'destroy'])->name('favourite');
 });
 
 Route::middleware('guest')->group(function () {
