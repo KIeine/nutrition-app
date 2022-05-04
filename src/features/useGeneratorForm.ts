@@ -18,7 +18,7 @@ export const useGeneratorForm = () => {
     },
     error: {
       name: 'error',
-      title: 'Calorie error',
+      title: 'Meal calorie error',
       type: 'number',
       step: 0,
       required: true,

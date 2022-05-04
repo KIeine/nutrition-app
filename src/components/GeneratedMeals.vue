@@ -44,6 +44,7 @@ const sections = $computed(() => [
     <div class="flex items-center justify-center space-x-2">
       <p v-if="totalCalories">Total calories: {{ totalCalories }}</p>
       <BaseButton
+        v-if="$page.props.auth"
         small
         :disabled="!(dinner && lunch && breakfast)"
         @click="onSaveFavourite"
