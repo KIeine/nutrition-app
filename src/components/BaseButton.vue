@@ -9,11 +9,13 @@ const {
   disabled = false,
   loading = false,
   icon = null,
+  small = false,
 } = defineProps<{
   theme?: keyof Theme;
   disabled?: boolean;
   loading?: boolean;
   icon?: string;
+  small?: boolean;
 }>();
 
 const THEME_TO_CLASS = $computed(
@@ -35,12 +37,13 @@ const classesByTheme = computed(() => THEME_TO_CLASS[theme]);
 
 <template>
   <button
-    class="flex items-center justify-center px-4 py-2 rounded-md focus:shadow-lg"
+    class="flex items-center justify-center rounded-md focus:shadow-lg"
     :disabled="disabled || loading"
     :class="[
       classesByTheme,
       { 'cursor-wait': loading },
       { 'cursor-not-allowed': disabled },
+      { 'p-1 text-sm': small, 'px-4 py-2': !small },
     ]"
   >
     <BaseIcon v-if="loading" icon="loading" class="w-5 h-5 mr-2 animate-spin" />
