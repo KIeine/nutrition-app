@@ -5,6 +5,7 @@ import GeneratedMealItem from './GeneratedMealItem.vue';
 
 const emit = defineEmits<{
   (e: 'retry', value: string): void;
+  (e: 'favourite'): void;
 }>();
 
 const { totalCalories, breakfast, lunch, dinner } = defineProps<{
@@ -15,6 +16,7 @@ const { totalCalories, breakfast, lunch, dinner } = defineProps<{
 }>();
 
 const onRetry = (type: string) => emit('retry', type);
+const onSaveFavourite = () => emit('favourite');
 
 const sections = $computed(() => [
   {
@@ -39,9 +41,16 @@ const sections = $computed(() => [
   <div class="flex flex-col items-center justify-center space-y-5">
     <h3 class="text-xl font-semibold">Today's meal plan</h3>
 
-    <p v-if="totalCalories" class="text-left">
-      Total calories: {{ totalCalories }}
-    </p>
+    <div class="flex items-center justify-center space-x-2">
+      <p v-if="totalCalories">Total calories: {{ totalCalories }}</p>
+      <BaseButton
+        small
+        :disabled="!(dinner && lunch && breakfast)"
+        @click="onSaveFavourite"
+      >
+        Favourite
+      </BaseButton>
+    </div>
 
     <div class="space-y-4">
       <div v-for="section in sections" :key="section.title">

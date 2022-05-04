@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('breakfast_id')->constrained('meals');
             $table->foreignId('lunch_id')->constrained('meals');
-            $table->foreignId('snack_id')->nullable()->constrained('meals');
             $table->foreignId('dinner_id')->constrained('meals');
 
             $table->timestamps();

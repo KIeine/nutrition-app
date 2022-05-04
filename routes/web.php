@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\FavouriteController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GenerateMealsController;
 use App\Http\Controllers\HomeController;
@@ -23,6 +25,10 @@ Route::get('/', fn () => to_route('home'));
 Route::get('/home', HomeController::class)->name('home');
 Route::post('/home', [GenerateMealsController::class, 'generate'])->name('generate');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::post('/favourite', [FavouriteController::class, 'store'])->name('favourite');
+});
 
 Route::middleware('guest')->group(function () {
     Route::controller(LoginController::class)->group(function () {

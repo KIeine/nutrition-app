@@ -9,17 +9,19 @@ class Favourite extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'breakfast_id',
+        'lunch_id',
+        'dinner_id'
+    ];
+
     public function breakfast()
     {
         return $this->belongsTo(Meal::class);
     }
 
     public function lunch()
-    {
-        return $this->belongsTo(Meal::class);
-    }
-
-    public function snack()
     {
         return $this->belongsTo(Meal::class);
     }

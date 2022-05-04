@@ -1,4 +1,5 @@
 <script setup lang="ts" name="Home">
+import { Inertia } from '@inertiajs/inertia';
 import { useGeneratorForm } from '@/features/useGeneratorForm';
 import { Ingredient, Meal } from '@/features/useTypes';
 
@@ -68,6 +69,23 @@ const onRetryMeal = (type: string) => {
       preserveState: true,
     });
 };
+
+const onSaveFavourite = () => {
+  const items = {
+    breakfast: breakfast?.id,
+    lunch: lunch?.id,
+    dinner: dinner?.id,
+  };
+  Inertia.post(
+    '/favourite',
+    // @ts-ignore
+    items,
+    {
+      preserveScroll: true,
+      preserveState: true,
+    },
+  );
+};
 </script>
 
 <template>
@@ -130,6 +148,7 @@ const onRetryMeal = (type: string) => {
       :lunch="lunch"
       :dinner="dinner"
       @retry="onRetryMeal"
+      @favourite="onSaveFavourite"
     />
   </div>
 </template>
