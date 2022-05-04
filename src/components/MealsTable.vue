@@ -29,7 +29,7 @@ const mealsLinked = computed(() =>
     id: item.id,
     title: item.title,
     image: item.image,
-    type: item.type,
+    type: item.type[0].toUpperCase() + item.type.slice(1),
     link: `/meals/${item.id}`,
   })),
 );

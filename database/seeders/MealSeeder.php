@@ -18,7 +18,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Banana pancakes',
-            'type' => 'Breakfast',
+            'type' => 'breakfast',
             'image' => '/meals/banana-pancakes.jpg',
             'description' => 'Peel and mash a banana, mix with the egg, flour and a little bit of baking powder if you want the pancakes to rise a bit and cook.',
         ]);
@@ -43,7 +43,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Avocado egg toast',
-            'type' => 'Breakfast',
+            'type' => 'breakfast',
             'description' => 'Description'
         ]);
 
@@ -76,7 +76,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Overnight oats',
-            'type' => 'Breakfast',
+            'type' => 'breakfast',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -118,7 +118,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Strawberry avocado spinach salad',
-            'type' => 'Lunch',
+            'type' => 'lunch',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -140,7 +140,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Tuna and Avocado wrap',
-            'type' => 'Lunch',
+            'type' => 'lunch',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -178,7 +178,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Spinach tuna pasta',
-            'type' => 'Lunch',
+            'type' => 'lunch',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -210,7 +210,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Lettuce and spinach salad',
-            'type' => 'Lunch',
+            'type' => 'lunch',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -267,7 +267,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Sausage & broccoli pasta',
-            'type' => 'Dinner',
+            'type' => 'dinner',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -299,7 +299,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Power Greek Salad',
-            'type' => 'Lunch',
+            'type' => 'lunch',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -331,7 +331,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Turkey burger & Vegetables',
-            'type' => 'Dinner',
+            'type' => 'dinner',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -368,7 +368,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Tomato pasta',
-            'type' => 'Dinner',
+            'type' => 'dinner',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -410,7 +410,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Noodle stir fry',
-            'type' => 'Dinner',
+            'type' => 'dinner',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -442,7 +442,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Tofu & Broccoli',
-            'type' => 'Lunch',
+            'type' => 'lunch',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
@@ -479,7 +479,7 @@ class MealSeeder extends Seeder
         DB::table('meals')->insert([
             'user_id' => 1,
             'title' => 'Chocolate banana smoothie',
-            'type' => 'Breakfast',
+            'type' => 'breakfast',
             'description' => 'Description'
         ]);
         DB::table('ingredient_meal')->insert([
