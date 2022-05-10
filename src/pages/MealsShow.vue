@@ -51,7 +51,12 @@ provide('ingredients', ingredients);
     <div class="flex items-start justify-between">
       <div class="flex space-x-6">
         <img :src="imageSrc" alt="meal-image" class="object-cover w-40 h-40" />
-        <h2 class="text-2xl font-bold">{{ meal.title }}</h2>
+        <div>
+          <h2 class="text-2xl font-bold">{{ meal.title }}</h2>
+          <p class="mt-2 text-sm text-gray-400">
+            Submitted by {{ auth.submitted_by }}
+          </p>
+        </div>
       </div>
 
       <BaseButton v-if="auth.can_edit" theme="secondary" @click="onEdit">
