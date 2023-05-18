@@ -1,4 +1,5 @@
 <script lang="ts">
+// TODO: change to useOptions()
 export default {
   layout: null,
 };
@@ -18,9 +19,9 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <main class="flex items-center justify-center min-h-screen">
+  <main class="flex min-h-screen items-center justify-center">
     <InertiaHead title="Login" />
-    <section class="flex flex-col p-5 rounded-md shadow-md">
+    <section class="flex flex-col rounded-md p-5 shadow-md">
       <h2 class="text-xl font-semibold">Login</h2>
 
       <BaseForm class="mt-10" @submit="onSubmit" :is-loading="form.processing">

@@ -1,5 +1,5 @@
 <script setup lang="ts" name="Home">
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 import { useGeneratorForm } from '@/features/useGeneratorForm';
 import { Ingredient, Meal } from '@/features/useTypes';
 
@@ -29,9 +29,7 @@ const showMeals = $computed(
 let filterableIngredients = $computed(() =>
   ingredients.filter(
     (item) =>
-      // @ts-ignore
       !excludedIngredients.includes(item) &&
-      // @ts-ignore
       !includedIngredients.includes(item),
   ),
 );
@@ -76,24 +74,20 @@ const onSaveFavourite = () => {
     lunch: lunch?.id,
     dinner: dinner?.id,
   };
-  Inertia.post(
-    '/favourite',
-    // @ts-ignore
-    items,
-    {
-      preserveScroll: true,
-      preserveState: true,
-    },
-  );
+
+  router.post('/favourite', items, {
+    preserveScroll: true,
+    preserveState: true,
+  });
 };
 </script>
 
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-center">Meal plan generator</h1>
+    <h1 class="text-center text-2xl font-bold">Meal plan generator</h1>
 
     <div
-      class="flex items-center justify-center max-w-2xl p-10 mx-auto mt-20 bg-white rounded-lg shadow-md"
+      class="mx-auto mt-20 flex max-w-2xl items-center justify-center rounded-lg bg-white p-10 shadow-md"
     >
       <form @submit.prevent="onSubmit" class="space-y-4">
         <FormTextField small v-model="form.calories" v-bind="schema.calories" />
@@ -120,7 +114,7 @@ const onSaveFavourite = () => {
         </FormIngredientsField>
 
         <div>
-          <BaseButton :loading="form.processing" class="w-24 mx-auto mt-10">
+          <BaseButton :loading="form.processing" class="mx-auto mt-10 w-24">
             Generate
           </BaseButton>
         </div>

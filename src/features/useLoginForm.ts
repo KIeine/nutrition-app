@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/vue3';
 
 export const useLoginForm = () => {
   const form = useForm({

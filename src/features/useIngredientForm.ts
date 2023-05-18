@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/vue3';
 import { Ingredient } from './useTypes';
 
 export const useIngredientForm = (ingredient: Ingredient | undefined) => {

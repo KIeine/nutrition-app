@@ -1,6 +1,5 @@
 import { createApp, h } from 'vue';
-import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3';
-import { InertiaProgress } from '@inertiajs/progress';
+import { createInertiaApp, Link, Head } from '@inertiajs/vue3';
 
 import ECharts from 'vue-echarts';
 import { use } from 'echarts/core';
@@ -23,8 +22,8 @@ createInertiaApp({
     page.layout = page.layout === undefined ? DefaultLayout : page.layout;
     return page;
   },
-  setup({ el, app, props, plugin }) {
-    createApp({ render: () => h(app, props) })
+  setup({ el, App, props, plugin }) {
+    createApp({ render: () => h(App, props) })
       .use(plugin)
       // inertia
       .component('InertiaLink', Link)
@@ -36,5 +35,3 @@ createInertiaApp({
       .mount(el);
   },
 });
-
-InertiaProgress.init();

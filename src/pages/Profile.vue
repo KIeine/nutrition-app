@@ -1,6 +1,6 @@
 <script setup lang="ts" name="Profile">
-import { Inertia } from '@inertiajs/inertia';
-import { Meal, laravelPagination } from '@/features/useTypes';
+import { router } from '@inertiajs/vue3';
+import type { Meal, laravelPagination } from '@/features/useTypes';
 
 import FavouritePlanItem from '@/components/FavouritePlanItem.vue';
 import BasePagination from '@/components/BasePagination.vue';
@@ -19,7 +19,7 @@ const { favourites } = defineProps<{
 }>();
 
 const onRemove = (id: number) => {
-  Inertia.delete(`/favourite/${id}`, {
+  router.delete(`/favourite/${id}`, {
     preserveScroll: true,
   });
 };
@@ -33,7 +33,7 @@ const onRemove = (id: number) => {
 
     <div
       v-if="favourites.data.length"
-      class="grid grid-cols-3 gap-6 mt-10 desktop:grid-cols-4"
+      class="mt-10 grid grid-cols-3 gap-6 desktop:grid-cols-4"
     >
       <FavouritePlanItem
         v-for="item in favourites.data"
