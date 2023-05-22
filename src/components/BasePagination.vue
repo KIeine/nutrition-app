@@ -8,10 +8,9 @@ const { links } = defineProps<{
 
 <template>
   <div class="flex space-x-4">
-    <component
+    <span
       v-for="link in links"
       :key="link.label"
-      :is="link.url ? 'InertiaLink' : 'span'"
       :href="link.url"
       v-html="link.label"
       :class="{

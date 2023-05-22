@@ -9,7 +9,7 @@ module.exports = {
     'plugin:vue/vue3-essential',
     '@vue/eslint-config-typescript/recommended',
     '@vue/eslint-config-prettier',
-    'prettier/@typescript-eslint',
+    // 'prettier/@typescript-eslint',
   ],
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -18,9 +18,12 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
-    'import/prefer-default-export': 'off',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
-    'import/extensions': ['error', 'ignorePackages'],
-    'no-unused-vars': 'warn',
+    // 'import/prefer-default-export': 'off',
+    // 'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    // 'import/extensions': ['error', 'ignorePackages'],
+    'prettier/prettier': 'off',
+    'no-unused-vars': 'off',
+    'vue/no-setup-props-destructure': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 };

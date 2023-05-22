@@ -25,7 +25,7 @@ const imageSrc = computed(
       <thead>
         <tr>
           <th
-            class="p-3 text-xl font-light text-left border-2 border-gray-200"
+            class="border-2 border-gray-200 p-3 text-left text-xl font-light"
             v-for="header in headers"
             :key="header.key"
             :class="{ 'w-32': header.key === 'image' }"
@@ -35,28 +35,27 @@ const imageSrc = computed(
         </tr>
       </thead>
       <tbody>
-        <component
+        <tr
           v-for="item in items"
           :key="item.id"
-          :is="item.link ? 'InertiaLink' : 'tr'"
           :href="item.link"
           class="table-row border-x-2 hover:bg-gray-100"
         >
           <td
             v-for="header in headers"
             :key="header.key"
-            class="text-lg font-light align-top border-b-2"
+            class="border-b-2 align-top text-lg font-light"
           >
             <img
               v-if="header.key === 'image'"
               :src="imageSrc(item.image)"
               alt="ingredient-image"
-              class="object-cover w-32 h-24"
+              class="h-24 w-32 object-cover"
             />
 
             <span class="p-3" v-else>{{ item[header.key] ?? '-' }}</span>
           </td>
-        </component>
+        </tr>
       </tbody>
     </table>
 

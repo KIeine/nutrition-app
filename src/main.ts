@@ -1,20 +1,19 @@
-import { createApp, h } from 'vue';
+import { createSSRApp, h } from 'vue';
 import { createInertiaApp, Link, Head } from '@inertiajs/vue3';
 
-import ECharts from 'vue-echarts';
-import { use } from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
-import { PieChart } from 'echarts/charts';
-import { TooltipComponent } from 'echarts/components';
+// import ECharts from 'vue-echarts';
+// import { use } from 'echarts/core';
+// import { CanvasRenderer } from 'echarts/renderers';
+// import { PieChart } from 'echarts/charts';
+// import { TooltipComponent } from 'echarts/components';
 
 import './assets/main.css';
-import '../auto-imports.d';
 
 import DefaultLayout from './layouts/DefaultLayout.vue';
 import BaseIcon from './components/BaseIcon.vue';
 import BaseButton from './components/BaseButton.vue';
 
-use([CanvasRenderer, PieChart, TooltipComponent]);
+// use([CanvasRenderer, PieChart, TooltipComponent]);
 
 createInertiaApp({
   resolve: async (name) => {
@@ -23,13 +22,13 @@ createInertiaApp({
     return page;
   },
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+    createSSRApp({ render: () => h(App, props) })
       .use(plugin)
       // inertia
       .component('InertiaLink', Link)
       .component('InertiaHead', Head)
       // components
-      .component('EChart', ECharts)
+      // .component('EChart', ECharts)
       .component('BaseIcon', BaseIcon)
       .component('BaseButton', BaseButton)
       .mount(el);

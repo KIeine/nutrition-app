@@ -6,19 +6,19 @@ const { ingredient } = defineProps<{
   ingredient: Ingredient;
 }>();
 
-const nutritionalInfo = computed(() =>
+const nutritionalInfo = $computed(() =>
   useIngredientNutritionalInfo(ingredient),
 );
 </script>
 
 <template>
-  <div class="flex flex-col w-1/2 space-y-10">
+  <div class="flex w-1/2 flex-col space-y-10">
     <div class="max-w-max">
       <h5 class="text-lg font-semibold">
         Nutritional information per {{ ingredient.serving_name }}
       </h5>
 
-      <div class="flex justify-between mt-6">
+      <div class="mt-6 flex justify-between">
         <p>One {{ ingredient.serving_name }}:</p>
         <p>{{ ingredient.serving_grams }} g</p>
       </div>
@@ -36,7 +36,7 @@ const nutritionalInfo = computed(() =>
     </div>
 
     <div>
-      <EChart class="h-72" :option="nutritionalInfo.chartOptions" />
+      <!-- <EChart class="h-72" :option="nutritionalInfo.chartOptions" /> -->
     </div>
   </div>
 </template>

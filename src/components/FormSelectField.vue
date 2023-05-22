@@ -4,7 +4,6 @@ interface Props {
   title: string;
   small?: boolean;
   required?: boolean;
-  modelValue?: string | null;
   error?: string;
   options: {
     label: string;
@@ -12,26 +11,16 @@ interface Props {
   }[];
 }
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | number | null): void;
-}>();
-
 const {
   name,
   title,
   small = false,
   required = false,
-  modelValue = '',
   error = '',
   options = [],
 } = defineProps<Props>();
 
-watch(
-  () => modelValue,
-  (value) => {
-    emit('update:modelValue', value);
-  },
-);
+const modelValue = defineModel<string>();
 </script>
 
 <template>
@@ -47,7 +36,7 @@ watch(
         :required="required"
         v-model="modelValue"
         :class="{ 'w-32': small, 'w-full md:w-96': !small }"
-        class="p-1 border rounded-md outline-none hover:shadow-input-hover focus:shadow-input-focus"
+        class="rounded-md border p-1 outline-none hover:shadow-input-hover focus:shadow-input-focus"
       >
         <option
           v-for="option in options"

@@ -21,7 +21,7 @@ const nutritionalInfo = computed(() => useMealNutritionalInfo(totals, type));
     </div>
 
     <div>
-      <EChart class="h-72" :option="nutritionalInfo.chartOptions" />
+      <!-- <EChart class="h-72" :option="nutritionalInfo.chartOptions" /> -->
     </div>
   </div>
 </template>

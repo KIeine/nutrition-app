@@ -8,9 +8,8 @@ const { meal, inertiaLink = false } = defineProps<{
 </script>
 
 <template>
-  <component
+  <a
     v-if="meal"
-    :is="inertiaLink ? 'InertiaLink' : 'a'"
     target="_blank"
     :href="`/meals/${meal?.id}`"
     class="flex items-center space-x-4 rounded shadow hover:bg-gray-100"
@@ -18,16 +17,16 @@ const { meal, inertiaLink = false } = defineProps<{
     <img
       :src="meal.image ?? '/images/placeholder.png'"
       alt="ingredient-image"
-      class="object-contain w-20 h-20"
+      class="h-20 w-20 object-contain"
     />
 
-    <div class="space-y-2 truncate w-72">
-      <p :title="meal.title" class="font-semibold truncate">
+    <div class="w-72 space-y-2 truncate">
+      <p :title="meal.title" class="truncate font-semibold">
         {{ meal.title }}
       </p>
       <p v-if="meal.calories">Calories: {{ meal.calories }}</p>
     </div>
-  </component>
+  </a>
 
   <p v-else>We couldn't find a fitting meal based on your search parameters.</p>
 </template>
